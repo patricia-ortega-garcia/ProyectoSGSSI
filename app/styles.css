@@ -1,0 +1,35 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2D3250;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #F9B17A;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #424769;
+    color: #FFFFFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+input{
+    background-color: #676F9D;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+  }
+
+
