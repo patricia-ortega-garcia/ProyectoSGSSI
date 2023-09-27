@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechaNacimiento = $_POST["fecha_nacimiento"];
     $email = $_POST["email"];
     $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash de la contraseña
+    $password = $_POST["password"];
 
     // Valida y procesa los datos (puedes agregar más validaciones)
 
@@ -27,8 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepara la consulta SQL
     $stmt = mysqli_prepare($conn, $sql);
 
-    $stmt = mysqli_prepare($conn, $sql);
-
+    //Verificar que la función 'mysqli_prepare' haya tenido éxito
     if (!$stmt) {
         die("Error al preparar la consulta SQL: " . mysqli_error($conn));
     }
