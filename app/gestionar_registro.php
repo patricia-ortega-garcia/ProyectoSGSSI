@@ -9,8 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telefono = $_POST["telefono"];
     $fechaNacimiento = $_POST["fecha_nacimiento"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $usuario = $_POST["username"];
+    $contraseña = $_POST["password"];
 
     // Valida y procesa los datos (puedes agregar más validaciones)
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Crea la consulta SQL para insertar el nuevo usuario en la tabla
-    $sql = "INSERT INTO usuarios (nombre, apellidos, dni, telefono, fecha_nacimiento, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nombre, apellidos, dni, telefono, fecha_nacimiento, email, usuario, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepara la consulta SQL
     $stmt = mysqli_prepare($conn, $sql);
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Asocia los parámetros con los valores
-    mysqli_stmt_bind_param($stmt, "ssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $username, $password);
+    mysqli_stmt_bind_param($stmt, "ssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $contraseña);
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {
