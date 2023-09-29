@@ -25,9 +25,9 @@
                 <!-- <button type="submit">Iniciar Sesión </button> -->
 
                 <div class="button-container">
-                    <button type="submit">Iniciar Sesión </button>
+                    <button class="button secondary-button" type="submit">Iniciar Sesión </button>
                     <pre>     </pre>
-                    <button onclick="window.location.href='registro.html'">Registrarse</button>
+                    <button class="button secondary-button" onclick="window.location.href='gestionar_registro.php'">Registrarse</button>
                 </div>
 
             </form>

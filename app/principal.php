@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Página principal</h1>
+        <h1>Goodgames</h1>
     </header>
 
     <main>
@@ -35,13 +35,37 @@
                <!-- button type="submit">Iniciar Sesión </button> -->
 
                 <div class="button-container">
-                    <button type="submit">Buscar </button>
+                    <button class="button secondary-button" type="submit">Buscar </button>
                     <pre>     </pre>
-                    <button onclick="window.location.href='anadir_videojuego.html'">Añadir videojuego</button>
+                    <button class="button secondary-button" onclick="window.location.href='anadir_videojuego.html'">Añadir videojuego</button>
                 </div>
 
             </form>
         </section>
     </main>
+
+    <main>
+        <div class="button-container">
+            <button class="button secondary-button" onclick="window.location.href='ajustes_cuenta.php'">Mi Perfil </button>
+            <pre>     </pre>
+            <button class="button secondary-button" onclick="window.location.href='index.php'">Cerrar Sesión</button>
+        </div>
+    </main>
+
+    <!-- 
+    <footer>
+        <section>
+            <button onclick="window.location.href='index.php'">Cerrar Sesión</button>
+             
+            <ul class= "footer-left">
+
+            </ul>
+            <ul class= "footer-right">
+
+            </ul> 
+        </section>
+    </footer>
+    -->
+
 </body>
 </html>
