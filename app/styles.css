@@ -22,6 +22,15 @@ main {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+footer {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #424769;
+    color: #FFFFFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 input{
     background-color: #676F9D;
     color: #FFFFFF;
@@ -30,6 +39,40 @@ input{
 
 .button-container {
     display: flex;
-  }
+}
+
+
+/* Estilos para botones */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db; /* Color de fondo principal */
+    color: #fff; /* Color del texto */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo al pasar el ratón por encima */
+.button:hover {
+    background-color: #2980b9; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilos para botones secundarios */
+.secondary-button {
+    background-color: #F9B17A; /* Color de fondo secundario */
+}
+
+/* Estilo al pasar el ratón por encima para botones secundarios */
+.secondary-button:hover {
+    background-color: #e89e66; /* Color de fondo al pasar el ratón para botones secundarios */
+}
+
+
 
 

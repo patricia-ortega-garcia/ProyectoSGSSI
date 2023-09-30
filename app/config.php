@@ -26,4 +26,25 @@ if (!$conn) {
     die("Database connection failed: " . $conn->connect_error);
   }
 
+  /*
+  $backupFolder = "ProyectoSGSSI";
+
+  // Verificar si la carpeta existe, si no, la creamos
+  if (!is_dir($backupFolder)) {
+      mkdir($backupFolder, 0777, true); // Crea la carpeta con permisos
+  }
+
+  $backupFilePath = "$backupFolder/usuarios.sql"; // Ruta relativa
+
+  // Comando para crear una copia de seguridad de la base de datos
+  $command = "mysqldump -u $username -p $password $db > $backupFilePath";
+  
+
+  if (file_exists($backupFilePath)) {
+    echo "Copia de seguridad creada exitosamente.";
+  } else {
+    echo "Error al crear la copia de seguridad.";
+  }
+  */
+
 ?>
