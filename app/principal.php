@@ -79,7 +79,7 @@ $result = $conn->query($sql);
                 ?>
                 </table>
             <!--  <form id="catalogo-videojuegos-form" action="buscar_videojuego.php" method="POST"> -->
-            <label for="nombre">Nombre:</label>
+            <!-- <label for="nombre">Nombre:</label> -->
                <!--  <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br>
 
                 <label for="creador">Creador:</label>
