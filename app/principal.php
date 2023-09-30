@@ -46,7 +46,7 @@ $result = $conn->query($sql);
 
     <main>
         <section>
-            <h2>Catalogo de videojuegos</h2>
+            <h2>Catálogo de videojuegos</h2>
             <table>
         <tr>
             <th>Nombre</th>
