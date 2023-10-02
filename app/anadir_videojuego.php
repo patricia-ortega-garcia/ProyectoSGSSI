@@ -37,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {
-        //echo "Se ha añadido la información del juego";
+        echo "Se ha añadido la información del juego";
     } else {
-        //echo "Error al registrar el juego: " . mysqli_error($conn);
+        echo "Error al registrar el juego: " . mysqli_error($conn);
     }
 
     // Cierra la conexión y la declaración
