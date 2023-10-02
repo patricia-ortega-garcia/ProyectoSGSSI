@@ -50,8 +50,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
-<<<<<<< HEAD
-?>
-=======
-?>
->>>>>>> 90ebe8eb519cf208a8575929a7b54aae6dce588f
