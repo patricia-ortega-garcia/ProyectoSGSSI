@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Asocia los parámetros con los valores
-    mysqli_stmt_bind_param($stmt, $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
+    mysqli_stmt_bind_param($stmt, "ssssss", $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {

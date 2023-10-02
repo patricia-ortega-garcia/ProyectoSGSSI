@@ -23,7 +23,8 @@ $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $inicio = ($pagina - 1) * $porPagina;
 
 // Consulta SQL con LIMIT para paginación
-$sql = "SELECT * FROM mytable WHERE Name=$nombre AND Developer=$creador AND Producer=$productora AND Genre LIKE '*$genero*' AND Operating_System LIKE '*$sistema_operativo*' AND Date_Released=$fecha_lanzamiento LIMIT $inicio, $porPagina";
+//$sql = "SELECT * FROM mytable WHERE Name LIKE '*$nombre*' AND Developer LIKE '*$creador*' AND Producer LIKE '*$productora*' AND Genre LIKE '*$genero*' AND Operating_System LIKE '*$sistema_operativo*' AND Date_Released LIKE '*$fecha_lanzamiento*' LIMIT $inicio, $porPagina";
+$sql = "SELECT * FROM mytable WHERE Name LIKE '%$nombre%' AND Developer LIKE '%$creador%' AND Producer LIKE '%$productora%' AND Genre LIKE '%$genero%' AND Operating_System LIKE '%$sistema_operativo%' AND Date_Released LIKE '%$fecha_lanzamiento%'";
 $result = $conn->query($sql);
 
 }
@@ -54,39 +55,49 @@ $result = $conn->query($sql);
         <section>
             <h2>Catálogo de videojuegos</h2>
             <table>
-        <tr>
+        <!--<tr>
             <th>Nombre</th>
             <th>Desarrollador</th>
             <th>Productora</th>
             <th>Género</th>
             <th>sistema_operativo</th>
             <th>fecha_lanzamiento</th>
-        </tr>
+        </tr> -->
             <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["Name"] . "</td>";
-                echo "<td>" . $row["Developer"] . "</td>";
-                echo "<td>" . $row["Producer"] . "</td>";
-                echo "<td>" . $row["Genre"] . "</td>";
-                echo "<td>" . $row["Operating_System"] . "</td>";
-                echo "<td>" . $row["Date_Released"] . "</td>";
-                echo "</tr>";
-            }
+            if ($result->num_rows > 0) {
+                echo "<table border='1'>";
+                echo "<tr><th>Name</th><th>Developer</th><th>Producer</th><th>Genre</th><th>Operating_System</th><th>Date_Released></th></tr>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["Name"] . "</td>";
+                    echo "<td>" . $row["Developer"] . "</td>";
+                    echo "<td>" . $row["Producer"] . "</td>";
+                    echo "<td>" . $row["Genre"] . "</td>";
+                    echo "<td>" . $row["Operating_System"] . "</td>";
+                    echo "<td>" . $row["Date_Released"] . "</td>";
+                    echo "</tr>";
+                }
+            
             $sql = "SELECT COUNT(*) AS total FROM mytable";
-             $result = $conn->query($sql);
-             $fila = $result->fetch_assoc();
+            $result = $conn->query($sql);
+            $fila = $result->fetch_assoc();
             $totalPaginas = ceil($fila["total"] / $porPagina);
 
             // Mostrar enlaces de paginación
             echo "<div>";
             for ($i = 1; $i <= $totalPaginas; $i++) {
-                if ($i == $pagina) {
-                    echo "<strong>$i</strong> ";
+                 if ($i == $pagina) {
+                     echo "<strong>$i</strong> ";
                 } else {
-                    echo "<a href='?pagina=$i'>$i</a> ";
+                     echo "<a href='?pagina=$i'>$i</a> ";
                 }
             }
+            echo "</table>";
+           }
+           else {
+                echo "No se encontraron registros.";
+           }
+           $conn->close();
             ?>
             </table>
         </section>
