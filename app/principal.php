@@ -56,7 +56,7 @@ $result = $conn->query($sql);
             <?php
                while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["Name"] . "</td>";
+                echo "<td><a href='ver_videojuego.php?id=" . $row["id"] . "'>" . $row["Name"] . "</a></td>";
                 echo "<td>" . $row["Developer"] . "</td>";
                 echo "<td>" . $row["Genre"] . "</td>";
                 echo "</tr>";
