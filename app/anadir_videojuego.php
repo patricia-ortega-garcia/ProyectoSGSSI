@@ -33,23 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Asocia los parámetros con los valores
-
-    mysqli_stmt_bind_param($stmt, $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
-
-    // Ejecuta la consulta SQL
-    if (mysqli_stmt_execute($stmt)) {
-        //echo "Se ha añadido la información del juego";
-    } else {
-        //echo "Error al registrar el juego: " . mysqli_error($conn);
-
     mysqli_stmt_bind_param($stmt, "ssssss", $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {
-        echo "Se ha añadido la información del juego";
+        header("Location: principal.php");
+        // echo "Se ha añadido la información del juego";
     } else {
         echo "Error al registrar el juego: " . mysqli_error($conn);
-
     }
 
     // Cierra la conexión y la declaración
@@ -57,3 +48,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 
 }
+?>
