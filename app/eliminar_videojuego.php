@@ -7,6 +7,7 @@
     <title>Goodgames</title>
 </head>
 <body>
+
     <header>
         <h1>Goodgames</h1>
     </header>
@@ -36,6 +37,11 @@
         mysqli_close($conn);
         ?>
         </section>
+        <div class="button-container">
+            <pre>   </pre>
+            <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
+        </div>
     </main>
+    
     </body>
     </html>

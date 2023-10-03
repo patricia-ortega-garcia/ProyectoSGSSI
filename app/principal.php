@@ -50,14 +50,13 @@ $result = $conn->query($sql);
             <table>
         <tr>
             <th>Nombre</th>
-            <th>Desarrollador</th>
+
             <th>Género</th>
         </tr>
             <?php
                while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td><a href='ver_videojuego.php?id=" . $row["id"] . "'>" . $row["Name"] . "</a></td>";
-                echo "<td>" . $row["Developer"] . "</td>";
                 echo "<td>" . $row["Genre"] . "</td>";
                 echo "</tr>";
             }

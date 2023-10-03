@@ -28,6 +28,8 @@
                     <button class="button secondary-button" type="submit">Iniciar Sesión </button>
                     <pre>     </pre>
                     <button class="button secondary-button" onclick="window.location.href='gestionar_registro.php'">Registrarse</button>
+                    <pre>     </pre>
+                    <button class="button secondary-button" onclick="window.location.href='principal.php'">Ver Catálogo</button>
                 </div>
 
             </form>

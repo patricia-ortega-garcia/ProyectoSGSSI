@@ -53,17 +53,32 @@ if (isset($_GET['id'])) {
     // Cierra la conexión y la declaración
     
     mysqli_close($conn);
-
+    
 ?>
+ 
+
 </section>
     </main>
     <main>
         <div class="button-container">
-        <button class="button secondary-button" onclick="window.location.href='eliminar_videojuego.php?id=<?php echo $row['id']; ?>'">Eliminar Videojuego</button>
+        <button class="button secondary-button" onclick= "window.location.href='modificar_videojuego.php?id=<?php echo $row['id']; ?>'">Modificar Videojuego</button>
+
+        <pre>     </pre>
+        <button class="button secondary-button" onclick= "eliminarVideojuego(<?php echo $row['id']; ?>)">Eliminar Videojuego</button>
 
             <pre>     </pre>
             <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
         </div>
     </main>
+
+    <script>
+        function eliminarVideojuego(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este videojuego?")) {
+                window.location.href = 'eliminar_videojuego.php?id=' + id;
+            }
+            else
+            {}
+        }
+</script>
 </body>
 </html>
