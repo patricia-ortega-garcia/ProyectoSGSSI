@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php"); // Incluye el archivo de configuración
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //echo "Registro exitoso. ¡Bienvenido, $nombre!";
         session_start();
         $_SESSION["usuario"] = $usuario;
+        $_SESSION["DNI"] = $dni;
         header("Location: principal.php");
         exit();
     } else {

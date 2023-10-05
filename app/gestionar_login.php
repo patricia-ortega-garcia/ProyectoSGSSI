@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php"); // Incluye el archivo de configuración
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,9 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Crea la consulta SQL para buscar al usuario en la tabla
     $sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
+    $sql2 = "SELECT dni FROM usuarios WHERE usuario = ? AND contraseña = ?";
 
     // Prepara la consulta SQL
     $stmt = mysqli_prepare($conn, $sql);
+    $stmt2 = mysqli_prepare($conn, $sql);
 
     // Verificar que la función 'mysqli_prepare' haya tenido éxito
     if (!$stmt) {
@@ -31,10 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resultado = mysqli_stmt_get_result($stmt);
 
         // Comprueba si se encontró un usuario con las credenciales proporcionadas
-        if (mysqli_num_rows($resultado) === 1) {
-            // Inicio de sesión exitoso
+        if (mysqli_num_rows($resultado) === 1) { // Inicio de sesión exitoso
+            // Recuperar DNI
+                mysqli_stmt_bind_param($stmt2, "ss", $usuario, $contraseña);
+                $dni = mysqli_stmt_get_result($stmt2);
+            
+            // Crear la sesión
             session_start();
             $_SESSION["usuario"] = $usuario;
+            $_SESSION['DNI'] = $dni;
+            $sesion=mysqli_fetch_array($usuario);
             header("Location: principal.php"); // Redirige a la página de inicio
             exit();
         } else {

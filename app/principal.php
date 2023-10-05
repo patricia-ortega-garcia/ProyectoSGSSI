@@ -53,6 +53,7 @@ $result = $conn->query($sql);
 
             <th>Género</th>
         </tr>
+        
             <?php
                while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -97,6 +98,7 @@ $result = $conn->query($sql);
                 <input type="text" id="fecha_lanzamiento" name="fecha_lanzamiento" placeholder="Fecha lanzamiento" required><br>
                button type="submit">Iniciar Sesión </button> -->
 
+                <pre>     </pre>
                 <div class="button-container">
                     <button class="button secondary-button" onclick="window.location.href='buscar_juegos.html'">Buscar videojuegos</button>
                     <pre>     </pre>
