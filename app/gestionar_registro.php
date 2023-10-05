@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //echo "Registro exitoso. ¡Bienvenido, $nombre!";
         session_start();
         $_SESSION["usuario"] = $usuario;
-        $_SESSION["DNI"] = $dni;
+        $_SESSION["dni"] = $dni;
         header("Location: principal.php");
         exit();
     } else {
@@ -76,28 +76,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div id="error-message" style="color: F9B17A;"></div>
             <form id="registro-form" action="gestionar_registro.php" class="" method="POST" onsubmit="return verificarFormato();">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br>
+                <input type="text" id="nombre" name="nombre" placeholder="p. ej: Ana" required><br>
 
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required><br>
+                <input type="text" id="apellidos" name="apellidos" placeholder="p. ej: García" required><br>
 
                 <label for="dni">DNI:</label>
-                <input type="text" id="dni" name="dni" placeholder="DNI" required><br>
+                <input type="text" id="dni" name="dni" placeholder="p. ej: 99999999R" required><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required><br>
+                <input type="text" id="telefono" name="telefono" placeholder="p. ej: 600000000" required><br>
 
                 <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" required><br>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="p. ej: 2000-01-01" required><br>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Email" required><br>
+                <input type="email" id="email" name="email" placeholder="p. ej: ejemplo@gmail.com" required><br>
 
                 <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username" placeholder="Usuario" required><br>
+                <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>
 
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" placeholder="Contraseña" required><br>
+                <input type="password" id="password" name="password" placeholder="p. ej: contraseña1234" required><br>
                 
                 <div class="button-container">
                     <button class="button secondary-button" type="submit">Registrarse</button>

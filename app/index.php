@@ -17,10 +17,13 @@
             <p>Contraseña</p> -->
             <form id="inicio-sesion-form" action="gestionar_login.php" method="POST">
                 <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username" placeholder="Usuario" required><br>
+                <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>
 
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" placeholder="Contraseña" required><br>
+                <input type="password" id="password" name="password" placeholder="p. ej: contraseña1234" required><br>
+  
+                <label for="dni">DNI:</label>
+                <input type="dni" id="dni" name="dni" placeholder="p. ej: 99999999R" required><br>
 
                 <!-- <button type="submit">Iniciar Sesión </button> -->
 

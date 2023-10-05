@@ -80,7 +80,49 @@ function verificarFormato() {
             alert('DNI erróneo');
             return false;
         }
-    }
+    } 
 
+    window.alert("Formatos validos")
     return true; // Devuelve true si todas las validaciones son exitosas
+}
+
+
+function modificarUsuario(){
+    var nombre = document.getElementById('nombre').value;
+    var apellidos = document.getElementById('apellidos').value;
+    var dni = document.getElementById('dni').value;
+    var telefono = document.getElementById('telefono').value;
+    var fechaNacimiento = document.getElementById('fecha_nacimiento').value;
+    var email = document.getElementById('email').value;
+
+    if(nombre.length>0){
+        if((!isNaN(nombre.value))){
+            alert("El campo nombre contiene un numero");
+            return false;
+        }
+    }
+    if(apellidos.length>0){
+        if((!isNaN(apellidos.value))){
+            alert("El campo apellidos contiene un numero");
+            return false;
+        }
+    }
+    if(fechaNacimiento.length>0){ 
+                if(!(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(fechaNacimiento))){ //https://foroayuda.es/php-regex-para-verificar-la-fecha-esta-en-formato-aaaa-mm-dd/
+                    alert("La fecha introducida no sigue el patron: aaaa-mm-dd");
+                    return false;
+                }
+            }       
+     if(telefono.value.length>0){
+          if(telefono.length !=9){
+            alert("El numero debe ser de 9 digitos!");
+            return false;
+          }
+        }  
+    if(email.length>0){
+        if(!(/^[a-zA-Z]+([\.]?[a-zA-Z0-9_-]+)*@[a-z0-9]+([\.-]+[a-z0-9]+)*\.[a-z]{2,4}$/.test(email))){ //https://es.stackoverflow.com/questions/142/validar-un-email-en-javascript-que-acepte-todos-los-caracteres-latinos
+            alert("El email introducido no es correcto");
+            return false;   
+        }
+    }  
 }

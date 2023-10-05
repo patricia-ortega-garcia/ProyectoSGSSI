@@ -113,7 +113,7 @@ $result = $conn->query($sql);
         <div class="button-container">
             <button class="button secondary-button" onclick="window.location.href='ajustes_cuenta.php'">Mi Perfil </button>
             <pre>     </pre>
-            <button class="button secondary-button" onclick="window.location.href='index.php'">Cerrar Sesión</button>
+            <button class="button secondary-button" onclick="window.location.href='cerrar_sesion.php'">Cerrar Sesión</button>
         </div>
     </main>
 
