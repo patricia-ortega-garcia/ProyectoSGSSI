@@ -29,7 +29,7 @@
                 die("La conexión a la base de datos falló: " . mysqli_connect_error());
             }
             // Consulta SQL para actualizar los datos del producto
-            $sql = "UPDATE productos SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuego_id";
+            $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuego_id";
         
             if ($conn->query($sql) === TRUE) {
                 echo "Los cambios se guardaron con éxito.";
