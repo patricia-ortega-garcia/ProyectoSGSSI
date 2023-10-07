@@ -16,8 +16,8 @@
         include("config.php"); // Incluye el archivo de configuración
 
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $videojuego_id = $_POST["id"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
+            $videojuegoId = $_GET["id"];
             $name = $_POST["Name"];
             $dev = $_POST["Developer"];
             $prod = $_POST["Producer"];
@@ -29,7 +29,7 @@
                 die("La conexión a la base de datos falló: " . mysqli_connect_error());
             }
             // Consulta SQL para actualizar los datos del producto
-            $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuego_id";
+            $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuegoId";
         
             if ($conn->query($sql) === TRUE) {
                 echo "Los cambios se guardaron con éxito.";
@@ -41,20 +41,52 @@
         mysqli_close($conn);
 ?>
 
-<form action="" method="post">
-        <input type="hidden" name="id" value="<?php echo $videojuego_id; ?>">
+<?php
+include("config.php"); // Incluye el archivo de configuración
+
+if (isset($_GET['id'])) {
+    $videojuegoId = $_GET['id'];
+}
+    if (!$conn) {
+        die("La conexión a la base de datos falló: " . mysqli_connect_error());
+    }
+
+    // Crea la consulta SQL para insertar el nuevo usuario en la tabla
+    $sql = "SELECT * FROM mytable WHERE id = $videojuegoId";
+    
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        $nm= $row["Name"];
+        $dv= $row["Developer"];
+        $pr= $row["Producer"];
+        $gn= $row["Genre"];
+        $op= $row["Operating_System"];
+        $dt= $row["Date_Released"];
+
+    }
+
+    // Cierra la conexión y la declaración
+    
+    mysqli_close($conn);
+    
+?>
+
+<form action="ajustes_cuenta.php" method="POST">
+        
         <label for="Name">Nombre:</label>
-        <input type="text" name="Name" value="<?php echo $name; ?>"><br>
+        <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>
         <label for="Developer">Desarrollador:</label>
-        <input type="text" name="Developer" value="<?php echo $dev; ?>"><br>
+        <input type="text" id="Developer" name="Developer" value="<?php echo $dv; ?>"><br>
         <label for="Producer">Productor:</label>
-        <input type="text" name="Producer" value="<?php echo $prod; ?>"><br>
+        <input type="text" id="Producer" name="Producer" value="<?php echo $pr; ?>"><br>
         <label for="Genre">Género:</label>
-        <input type="text" name="Genre" value="<?php echo $gen; ?>"><br>
+        <input type="text" id="Genre" name="Genre" value="<?php echo $gn; ?>"><br>
         <label for="Operating_System">Sistema Operativo:</label>
-        <input type="text" name="Operating_System" value="<?php echo $op_sys; ?>"><br>
+        <input type="text" id="Operating_System" name="Operating_System" value="<?php echo $op; ?>"><br>
         <label for="Date_Released">Fecha de Lanzamiento:</label>
-        <input type="text" name="Date_Released" value="<?php echo $date; ?>"><br>
+        <input type="text" id="Date_Released" name="Date_Released" value="<?php echo $dt; ?>"><br>
         <!-- Agrega otros campos según sea necesario -->
 
         <input type="submit" value="Guardar Cambios">
