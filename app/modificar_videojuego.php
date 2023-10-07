@@ -16,8 +16,9 @@
         include("config.php"); // Incluye el archivo de configuración
 
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['id'])) {
-            $videojuegoId = $_GET["id"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+            $videojuego_id = $_POST["videojuegoId"];
             $name = $_POST["Name"];
             $dev = $_POST["Developer"];
             $prod = $_POST["Producer"];
@@ -29,16 +30,17 @@
                 die("La conexión a la base de datos falló: " . mysqli_connect_error());
             }
             // Consulta SQL para actualizar los datos del producto
-            $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuegoId";
+            $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuego_id";
         
             if ($conn->query($sql) === TRUE) {
                 echo "Los cambios se guardaron con éxito.";
             } else {
                 echo "Error al guardar los cambios: " . $conn->error;
             }
+            mysqli_close($conn);
+
+        
         }
-        // Cierra la conexión a la base de datos aquí
-        mysqli_close($conn);
 ?>
 
 <?php
@@ -73,8 +75,8 @@ if (isset($_GET['id'])) {
     
 ?>
 
-<form action="ajustes_cuenta.php" method="POST">
-        
+<form action="modificar_videojuego.php" method="POST">
+        <input type="hidden" name="videojuegoId" value="<?php echo $videojuegoId; ?>">
         <label for="Name">Nombre:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>
         <label for="Developer">Desarrollador:</label>
@@ -87,7 +89,7 @@ if (isset($_GET['id'])) {
         <input type="text" id="Operating_System" name="Operating_System" value="<?php echo $op; ?>"><br>
         <label for="Date_Released">Fecha de Lanzamiento:</label>
         <input type="text" id="Date_Released" name="Date_Released" value="<?php echo $dt; ?>"><br>
-        <!-- Agrega otros campos según sea necesario -->
+    
 
         <input type="submit" value="Guardar Cambios">
     </form>
