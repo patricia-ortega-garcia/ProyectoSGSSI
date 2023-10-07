@@ -61,7 +61,7 @@ if (isset($_GET['id'])) {
     </main>
     <main>
         <div class="button-container">
-        <button class="button secondary-button" onclick= "window.location.href='modificar_videojuego.php?id=<?php echo $row['id'] . $row['Name']; ?>'">Modificar Videojuego</button>
+        <button class="button secondary-button" onclick= "window.location.href='modificar_videojuego.php?id=<?php echo $row['id']?>'">Modificar Videojuego</button>
 
         <pre>     </pre>
         <button class="button secondary-button" onclick= "eliminarVideojuego(<?php echo $row['id']; ?>)">Eliminar Videojuego</button>
