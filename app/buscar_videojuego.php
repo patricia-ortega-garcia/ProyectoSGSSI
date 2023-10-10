@@ -66,15 +66,11 @@ $result = $conn->query($sql);
             <?php
             if ($result->num_rows > 0) {
                 echo "<table border='1'>";
-                echo "<tr><th>Name</th><th>Developer</th><th>Producer</th><th>Genre</th><th>Operating_System</th><th>Date_Released></th></tr>";
+                echo "<tr><th>Nombre</th><th>Género</th></tr>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row["Name"] . "</td>";
-                    echo "<td>" . $row["Developer"] . "</td>";
-                    echo "<td>" . $row["Producer"] . "</td>";
                     echo "<td>" . $row["Genre"] . "</td>";
-                    echo "<td>" . $row["Operating_System"] . "</td>";
-                    echo "<td>" . $row["Date_Released"] . "</td>";
                     echo "</tr>";
                 }
             
