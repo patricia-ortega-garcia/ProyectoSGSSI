@@ -51,11 +51,11 @@ function verificarFormato() {
 
     console.log("ha entrado");
 
-    if (nombre === '' || !isNaN(nombre)) {
+    if (nombre === '' || hasNumber(nombre)) {
         window.alert("El campo nombre está vacío o contiene un número");
         return false;
     }
-    if (apellidos === '' || !isNaN(apellidos)) {
+    if (apellidos === '' || hasNumber(apellidos)) {
         window.alert("El campo apellidos está vacío o contiene un número");
         return false;
     }
@@ -95,13 +95,13 @@ function modificarUsuario(){
     var email = document.getElementById('email').value;
 
     if(nombre.length>0){
-        if((!isNaN(nombre))){
+        if((hasNumber(nombre))){
             window.alert("El campo nombre contiene un numero");
             return false;
         }
     }
     if(apellidos.length>0){
-        if((!isNaN(apellidos))){
+        if((hasNumber(apellidos))){
             window.alert("El campo apellidos contiene un numero");
             return false;
         }
@@ -126,3 +126,8 @@ function modificarUsuario(){
     }  
 
 }
+
+function hasNumber(myString) {
+    return /\d/.test(myString);
+  }
+  //https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript  
