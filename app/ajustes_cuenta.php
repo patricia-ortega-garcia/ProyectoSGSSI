@@ -18,6 +18,11 @@ mysqli_stmt_bind_param($stmt, "ss", $usuario, $dni);
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
 $datosUsuario = mysqli_fetch_assoc($resultado);
+$nm = $datosUsuario["nombre"];
+$ap = $datosUsuario["apellidos"];
+$tlf = $datosUsuario["telefono"];
+$em = $datosUsuario["email"];
+$fn = $datosUsuario["fecha_nacimiento"];
 
 if ($resultado) {
     $datosUsuario = mysqli_fetch_assoc($resultado);
@@ -152,19 +157,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre"><br>
+                <input type="text" id="nombre" name="nombre" placeholder="<?php echo $nm; ?>"><br>
 
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos"><br>
+                <input type="text" id="apellidos" name="apellidos" placeholder="<?php echo $ap; ?>"><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono"><br>
+                <input type="text" id="telefono" name="telefono" placeholder="<?php echo $tlf; ?>"><br>
 
                 <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="<?php echo $fn; ?>"><br>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email"><br>
+                <input type="email" id="email" name="email" placeholder="<?php echo $em; ?>"><br>
 
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username"><br>
