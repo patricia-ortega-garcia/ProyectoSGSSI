@@ -34,22 +34,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
     $telefono = $_POST["telefono"];
-    $fechaNacimiento = $_POST["fecha_nacimiento"];
+    $fecha_nacimiento = $_POST["fecha_nacimiento"];
     $email = $_POST["email"];
     $usuario = $_POST["username"];
-    $contraseña = $_POST["password"];
+    $password = $_POST["password"];
     $actual=$_SESSION["dni"];
 
     $nombresql="UPDATE usuarios SET nombre='$nombre' WHERE dni='$actual' ";
     $apellidossql="UPDATE usuarios SET apellidos='$apellidos' WHERE dni='$actual' ";
     $telefonosql="UPDATE usuarios SET telefono='$telefono' WHERE dni='$actual' ";
-    $fechasql="UPDATE usuarios SET fecha_nacimiento='$fecha' WHERE dni='$actual' ";
+    $fechasql="UPDATE usuarios SET fecha_nacimiento='$fecha_nacimiento' WHERE dni='$actual' ";
     $emailsql="UPDATE usuarios SET email='$email' WHERE dni='$actual' ";
     $usuariosql="UPDATE usuarios SET usuario='$usuario' WHERE dni='$actual' ";
-    $contrasenasql="UPDATE usuarios SET contraseña='$contraseña' WHERE dni='$actual' ";
+    $contrasenasql="UPDATE usuarios SET contraseña='$password' WHERE dni='$actual' ";
 
     if(!empty($usuario)){
-        $ejecutar1=mysqli_query($conn,$usuario);
+        $ejecutar1=mysqli_query($conn,$usuariosql);
         if($ejecutar1){
         /*Cerrar sesion*/
           $_SESSION['usuario']=$usuario;
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(!empty($nombre)){
-        $ejecutar2=mysqli_query($conn,$nombre);
+        $ejecutar2=mysqli_query($conn,$nombresql);
         if($ejecutar2){
           ?> 
           <h3 class="bien">¡Nombre modificado correctamente!</h3>
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(!empty($apellidos)){
-        $ejecutar7=mysqli_query($conn,$apellidos);
+        $ejecutar7=mysqli_query($conn,$apellidossql);
         if($ejecutar7){
           ?> 
           <h3 class="bien">¡Apellido modificado correctamente!</h3>
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
     }
 
-    if(!empty($fechaNacimiento)){
+    if(!empty($fecha_nacimiento)){
       $ejecutar4=mysqli_query($conn,$fechasql);
       if($ejecutar4){
         ?> 
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
     }
 
-    if(!empty($contrasena)){
+    if(!empty($password)){
       $ejecutar6=mysqli_query($conn,$contrasenasql);
       if($ejecutar6){
         ?> 
