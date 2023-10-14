@@ -125,6 +125,4 @@ function modificarUsuario(){
         }
     }  
 
-    window.alert("Válido");
-    return true;
 }
