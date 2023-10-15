@@ -48,6 +48,7 @@ function verificarFormato() {
     var telefono = document.getElementById('telefono').value;
     var fechaNacimiento = document.getElementById('fecha_nacimiento').value;
     var email = document.getElementById('email').value;
+    var hoy = new Date();
 
     console.log("ha entrado");
 
@@ -67,6 +68,12 @@ function verificarFormato() {
         window.alert("La fecha introducida no sigue el patrón: aaaa-mm-dd");
         return false;
     }
+
+    if (fechaNacimiento = new Date(fechaNacimiento) > hoy){
+        window.alert("Tu fecha de nacimiento no puede ser mayor que la fecha de hoy")
+        return false;
+    }
+
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         window.alert("El email introducido no es correcto");
         return false;
@@ -82,8 +89,8 @@ function verificarFormato() {
         }
     } 
 
-    window.alert("Formatos validos")
-    return true; // Devuelve true si todas las validaciones son exitosas
+   // window.alert("Formatos validos")
+   // return true; // Devuelve true si todas las validaciones son exitosas
 }
 
 
@@ -93,6 +100,8 @@ function modificarUsuario(){
     var telefono = document.getElementById('telefono').value;
     var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
     var email = document.getElementById('email').value;
+    var hoy = new Date();
+    
 
     if(nombre.length>0){
         if((hasNumber(nombre))){
@@ -109,6 +118,10 @@ function modificarUsuario(){
     if(fecha_nacimiento.length>0){ 
                 if(!(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(fecha_nacimiento))){ //https://foroayuda.es/php-regex-para-verificar-la-fecha-esta-en-formato-aaaa-mm-dd/
                     window.alert("La fecha introducida no sigue el patron: aaaa-mm-dd");
+                    return false;
+                }
+                if (fecha_nacimiento = new Date(fecha_nacimiento) > hoy){
+                    window.alert("Tu fecha de nacimiento no puede ser mayor que la fecha de hoy")
                     return false;
                 }
             }       
