@@ -69,11 +69,11 @@ function verificarFormato() {
         return false;
     }
 
-    if (fecha_nacimiento = new Date(fecha_nacimiento) > hoy){
+    if (fechaNacimiento = new Date(fechaNacimiento) > hoy){
         window.alert("Tu fecha de nacimiento no puede ser mayor que la fecha de hoy")
         return false;
     }
-    
+
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         window.alert("El email introducido no es correcto");
         return false;
@@ -89,8 +89,8 @@ function verificarFormato() {
         }
     } 
 
-    window.alert("Formatos validos")
-    return true; // Devuelve true si todas las validaciones son exitosas
+   // window.alert("Formatos validos")
+   // return true; // Devuelve true si todas las validaciones son exitosas
 }
 
 
