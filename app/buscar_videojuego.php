@@ -69,7 +69,7 @@ $result = $conn->query($sql);
                 echo "<tr><th>Nombre</th><th>Género</th></tr>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["Name"] . "</td>";
+                    echo "<td><a href='ver_videojuego.php?id=" . $row["id"] . "'>" . $row["Name"] . "</a></td>";
                     echo "<td>" . $row["Genre"] . "</td>";
                     echo "</tr>";
                 }
@@ -96,6 +96,7 @@ $result = $conn->query($sql);
            $conn->close();
             ?>
             </table>
+            <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
         </section>
     </main>
 </head>
