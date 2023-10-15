@@ -30,12 +30,12 @@ $ sudo docker-compose up
 5. Acceder a la página de PHPMyAdmin:
 ```
 En el navegador visitar http://localhost:8890/ y registrarse.
-Usuario: admin
-Contraseña: test
+     Usuario: admin
+     Contraseña: test
 ```
 6. Importar la base de datos **computer_games.sql**:
 ```
-Haz click en "database" y luego en "import", donde elegimos el archivo **computer_games.sql**.
+Haz click en "database" y luego en "import", donde elegimos el archivo ProyectoSGSSI/computer_games.sql
 ```
 7. Visitar la página web:
 ```
