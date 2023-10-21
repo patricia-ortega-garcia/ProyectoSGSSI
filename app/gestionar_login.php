@@ -2,6 +2,8 @@
 session_start();
 include("config.php"); // Incluye el archivo de configuración
 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
     $usuario = $_POST["username"];
@@ -50,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Credenciales incorrectas
-            echo "Credenciales incorrectas...";
+            $_SESSION["mensaje"] = "Credenciales incorrectas. Por favor, inténtelo de nuevo.";
+            header("Location: index.php");
             exit();
         }
     } else {
