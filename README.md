@@ -1,7 +1,8 @@
 # GOODGAMES
 
-En este trabajo hemos desarrollado un Sistema Web usando tecnologías vistas en clase: HTML,CSS,JavaScript,PHP,MariaDB y Docker.
-Hemos decidido que la temática de la página web sea una biblioteca de videojuego.
+En este trabajo hemos desarrollado un Sistema Web usando tecnologías vistas en clase: **HTML**, **CSS**, **JavaScript**, **PHP**. 
+Además, se ha utilizado la base de datos **MariaDB** y su despliegue se ha automatizado mediante **Docker**.
+La temática escogida para la página web es una **biblioteca de videojuegos**. 
 
 ## Componentes del grupo:
 
@@ -33,11 +34,16 @@ En el navegador visitar http://localhost:8890/ y registrarse.
      Usuario: admin
      Contraseña: test
 ```
-6. Importar la base de datos **computer_games.sql**:
+6. Importar la base de datos **database.sql**:
 ```
-Haz click en "database" y luego en "import", donde elegimos el archivo ProyectoSGSSI/computer_games.sql
+Haz click en "database" y luego en "import", donde elegimos el archivo ProyectoSGSSI/database.sql
 ```
 7. Visitar la página web:
 ```
 En el navegador visitar http://localhost:81
+```
+
+Para parar los servicios, en otra terminal:
+```sh
+$ sudo docker-compose down
 ```
