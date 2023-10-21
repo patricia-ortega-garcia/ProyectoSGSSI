@@ -49,14 +49,16 @@ function verificarFormato() {
     var fechaNacimiento = document.getElementById('fecha_nacimiento').value;
     var email = document.getElementById('email').value;
     var hoy = new Date();
+    const pattern = new RegExp('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$', 'i');
+    //https://es.stackoverflow.com/questions/81041/expresion-regular-para-validar-letras-con-acentos-y-%C3%B1
 
     console.log("ha entrado");
 
-    if (nombre === '' || hasNumber(nombre)) {
+    if (nombre === '' || !pattern.test(nombre)) {
         window.alert("El campo nombre está vacío o contiene un número");
         return false;
     }
-    if (apellidos === '' || hasNumber(apellidos)) {
+    if (apellidos === '' || !pattern.test(apellidos)) {
         window.alert("El campo apellidos está vacío o contiene un número");
         return false;
     }
@@ -87,7 +89,11 @@ function verificarFormato() {
             alert('DNI erróneo');
             return false;
         }
-    } 
+    } else {
+        alert('DNI erróneo');
+            return false;
+    }
+
 
    // window.alert("Formatos validos")
    // return true; // Devuelve true si todas las validaciones son exitosas
@@ -101,17 +107,18 @@ function modificarUsuario(){
     var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
     var email = document.getElementById('email').value;
     var hoy = new Date();
-    
+    const pattern = new RegExp('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$', 'i');
+    //https://es.stackoverflow.com/questions/81041/expresion-regular-para-validar-letras-con-acentos-y-%C3%B1
 
     if(nombre.length>0){
-        if((hasNumber(nombre))){
-            window.alert("El campo nombre contiene un numero");
+        if((!pattern.test(nombre))){
+            window.alert("El campo nombre contiene un caracter no válido");
             return false;
         }
     }
     if(apellidos.length>0){
-        if((hasNumber(apellidos))){
-            window.alert("El campo apellidos contiene un numero");
+        if((!pattern.test(apellidos))){
+            window.alert("El campo apellidos contiene un caracter no válido");
             return false;
         }
     }
@@ -144,3 +151,37 @@ function hasNumber(myString) {
     return /\d/.test(myString);
   }
   //https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript  
+
+function check_videojuego(){
+    var nombre = document.getElementById('Name').value;
+    var dev = document.getElementById('Developer').value;
+    var prod = document.getElementById('Producer').value;
+    var gen = document.getElementById('Genre').value;
+    var op_sys = document.getElementById('Operating_System').value;
+    var date = document.getElementById('Date_Released').value;
+
+    if (nombre.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+    if (dev.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+    if (prod.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+    if (gen.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+    if (op_sys.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+    if (date.length == 0){
+        window.alert("Ningún campo puede estar vacío");
+        return false;
+    }
+}

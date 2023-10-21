@@ -1,8 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./script.js"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Goodgames</title>
 </head>
@@ -75,7 +79,7 @@ if (isset($_GET['id'])) {
     
 ?>
 
-<form action="modificar_videojuego.php" method="POST">
+<form action="modificar_videojuego.php" method="POST"  onsubmit="return check_videojuego();">
         <input type="hidden" name="videojuegoId" value="<?php echo $videojuegoId; ?>">
         <label for="Name">Nombre:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>
