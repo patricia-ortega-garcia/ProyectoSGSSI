@@ -31,9 +31,9 @@
             }
             // Consulta SQL para actualizar los datos del producto
             $sql = "UPDATE mytable SET Name = '$name', Developer = '$dev', Producer = '$prod', Genre = '$gen', Operating_System = '$op_sys', Date_Released = '$date' WHERE id = $videojuego_id";
-        
+
             if ($conn->query($sql) === TRUE) {
-                echo "Los cambios se guardaron con éxito.";
+                echo "Cambios guardados correctamente"; 
             } else {
                 echo "Error al guardar los cambios: " . $conn->error;
             }
@@ -89,9 +89,12 @@ if (isset($_GET['id'])) {
         <input type="text" id="Operating_System" name="Operating_System" value="<?php echo $op; ?>"><br>
         <label for="Date_Released">Fecha de Lanzamiento:</label>
         <input type="text" id="Date_Released" name="Date_Released" value="<?php echo $dt; ?>"><br>
-    
+        
+        <div class="button-container">
+                    <button class="button secondary-button" type="submit"> Guardar Cambios</button>
+                </div>
 
-        <input type="submit" value="Guardar Cambios">
+        
     </form>
     <div class="button-container">
             <pre>   </pre>
