@@ -46,7 +46,6 @@ session_start();
         
         }
 ?>
-
 <?php
 include("config.php"); // Incluye el archivo de configuración
 
@@ -95,15 +94,14 @@ if (isset($_GET['id'])) {
         <input type="text" id="Date_Released" name="Date_Released" value="<?php echo $dt; ?>"><br>
         
         <div class="button-container">
-                    <button class="button secondary-button" type="submit"> Guardar Cambios</button>
-                </div>
+            <button class="button secondary-button" type="submit"> Guardar Cambios</button>
+            <pre>   </pre>
+            <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
+         </div>
 
         
     </form>
-    <div class="button-container">
-            <pre>   </pre>
-            <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
-        </div>
+    
     
     </main>
     </body>
