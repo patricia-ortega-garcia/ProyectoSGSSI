@@ -13,6 +13,7 @@
     <main>
         <section>
             <h2>Formulario de Videojuego</h2>
+            
             <form id="videojuego-form" action="anadir_videojuego.php" method="POST">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br>
@@ -31,13 +32,14 @@
 
                 <label for="fecha_lanzamiento">Fecha lanzamiento:</label>
                 <input type="text" id="fecha_lanzamiento" name="fecha_lanzamiento" placeholder="Fecha lanzamiento" required><br>
-                
                 <div class="button-container">
                     <button class="button secondary-button" type="submit"> Añadir</button>
-                    <pre>     </pre>
-                    <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
                 </div>
             </form>
+            <pre>   </pre>
+            <div class="button-container">
+                <button class="button secondary-button" onclick="window.location.href='principal.php'">Volver a Juegos</button>
+             </div>
         </section>
     </main>
 </body>
