@@ -33,31 +33,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_stmt_execute($stmt)) {
         // Obtiene el resultado de la consulta
         $resultado = mysqli_stmt_get_result($stmt);
-
+    
         // Comprueba si se encontró un usuario con las credenciales proporcionadas
         if (mysqli_num_rows($resultado) === 1) { // Inicio de sesión exitoso
             // Recuperar DNI
-                #mysqli_stmt_bind_param($stmt2, "ss", $usuario, $contraseña);
-                #$dni = mysqli_stmt_get_result($stmt2);
-            
+            #mysqli_stmt_bind_param($stmt2, "ss", $usuario, $contraseña);
+            #$dni = mysqli_stmt_get_result($stmt2);
+    
             // Crear la sesión
             session_start();
             $_SESSION["usuario"] = $usuario;
             $_SESSION['dni'] = $dni;
-            
+    
             #$sesion=mysqli_fetch_array($usuario);
             header("Location: principal.php"); // Redirige a la página de inicio
-            exit();
         } else {
             // Credenciales incorrectas
-            echo "Credenciales incorrectas...";
-            exit();
+            // echo "Credenciales incorrectas...";
+            if ($_SESSION['incorrectosSeguidos'] == ''){
+                $_SESSION['incorrectosSeguidos'] = 1;
+            }
+            else {
+                $_SESSION['incorrectosSeguidos'] = $_SESSION['incorrectosSeguidos'] + 1;
+    
+                error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER["REMOTE_ADDR"]." --> ERROR de autentificación password o nombre de user incorrectos. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/5 \n", 3, "logs.log");
+    
+                if ($_SESSION['incorrectosSeguidos'] == 5) {
+                    error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Redirección a dirección antibotting. \n", 3, "logs.log");
+                    echo "<script> window.location.replace('http://localhost:81/fallo5veces.php'); </script> ";
+                } else {
+                    echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
+                }
+            }
+        exit();
         }
-    } else {
-        echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-    }
 
     // Cierra la conexión y la declaración
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
+    }
 }
