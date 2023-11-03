@@ -13,6 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST["username"];
     $contraseña = $_POST["password"];
 
+    /*$nombre = cifrar($_POST["nombre"]);
+    $apellidos = cifrar($_POST["apellidos"]);
+    $dni = cifrar($_POST["dni"]);
+    $telefono = cifrar($_POST["telefono"]);
+    $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
+    $email = cifrar($_POST["email"]);
+    $usuario = cifrar($_POST["username"]);
+    $contraseña = $_POST["password"];
+    $sal = "";
+
+    $cont = 0;
+    while ($cont < 10) {
+  	    $h = $h.chr(random_int(65, 90));
+  	$cont++;
+    }
+    
+    $contraseña_sal = $contraseña.$sal
+    $hash_contraseña = hash('sha256', $contraseña_sal, false);
+    */
 
     //Validar parametros (Falta hacer)
 
@@ -43,7 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["usuario"] = $usuario;
         $_SESSION["dni"] = $dni;
-        header("Location: principal.php");
+        echo "<h1> ¡Felicidades! </h1>";
+        error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Se ha creado el user con identificador ".$_POST['usuario']." \n", 3, "logs.log");
+        //header("Location: principal.php");
         exit();
     } else {
         //echo "Error al registrar el usuario: " . mysqli_error($conn);
