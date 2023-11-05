@@ -1,10 +1,11 @@
 <?php
 session_start();
 include("config.php"); // Incluye el archivo de configuración
+include("funciones.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
-    $nombre = $_POST["nombre"];
+    /*$nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
     $dni = $_POST["dni"];
     $telefono = $_POST["telefono"];
@@ -12,26 +13,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $usuario = $_POST["username"];
     $contraseña = $_POST["password"];
-
-    /*$nombre = cifrar($_POST["nombre"]);
+    */
+    $nombre = cifrar($_POST["nombre"]);
+    echo "NOMBRE: ";
+    echo $nombre;
     $apellidos = cifrar($_POST["apellidos"]);
+    echo "APELLIDOS: ";
+    echo $apellidos;
     $dni = cifrar($_POST["dni"]);
+    echo "DNI: ";
+    echo $dni;
     $telefono = cifrar($_POST["telefono"]);
+    echo "TELEFONO: ";
+    echo $telefono;
     $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
+    echo "FECHA_NACIMIENTO: ";
+    echo $fechaNacimiento;
     $email = cifrar($_POST["email"]);
+    echo "EMAIL: ";
+    echo $email;
     $usuario = cifrar($_POST["username"]);
+    echo "USUARIO: ";
+    echo $usuario;
     $contraseña = $_POST["password"];
     $sal = "";
 
     $cont = 0;
     while ($cont < 10) {
-  	    $h = $h.chr(random_int(65, 90));
+  	    $sal = $sal.chr(random_int(65, 90));
   	$cont++;
     }
+    echo "SAL: ";
+    echo $sal;
     
-    $contraseña_sal = $contraseña.$sal
+    $contraseña_sal = $contraseña.$sal;
+    $hash_contraseña = "";
     $hash_contraseña = hash('sha256', $contraseña_sal, false);
-    */
+    echo $hash_contraseña;
 
     //Validar parametros (Falta hacer)
 
