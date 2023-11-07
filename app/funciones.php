@@ -1,4 +1,7 @@
 <?php
+header("X-Frame-Options: SAMEORIGIN");
+header("X-Content-Type-Options: nosniff");
+
 function cifrar($dato) {
 	$puntero = fopen("clave_simetrica.txt", "r");
 	$clave = fgets($puntero, 50);

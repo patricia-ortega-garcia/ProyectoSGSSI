@@ -40,7 +40,6 @@ else if(/^\d{8}[a-zA-Z]$/.test(document.getElementById('dni').value)) {
 }
 }
 */
-
 function verificarFormato() {
     var nombre = document.getElementById('nombre').value;
     var apellidos = document.getElementById('apellidos').value;
