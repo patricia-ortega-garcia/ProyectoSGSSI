@@ -15,26 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contraseña = $_POST["password"];
     */
     $nombre = cifrar($_POST["nombre"]);
-    echo "NOMBRE: ";
-    echo $nombre;
     $apellidos = cifrar($_POST["apellidos"]);
-    echo "APELLIDOS: ";
-    echo $apellidos;
     $dni = cifrar($_POST["dni"]);
-    echo "DNI: ";
-    echo $dni;
     $telefono = cifrar($_POST["telefono"]);
-    echo "TELEFONO: ";
-    echo $telefono;
     $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
-    echo "FECHA_NACIMIENTO: ";
-    echo $fechaNacimiento;
     $email = cifrar($_POST["email"]);
-    echo "EMAIL: ";
-    echo $email;
     $usuario = cifrar($_POST["username"]);
-    echo "USUARIO: ";
-    echo $usuario;
     $contraseña = $_POST["password"];
     $sal = "";
 
@@ -43,8 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	    $sal = $sal.chr(random_int(65, 90));
   	$cont++;
     }
-    echo "SAL: ";
-    echo $sal;
     
     $contraseña_sal = $contraseña.$sal;
     $hash_contraseña = "";

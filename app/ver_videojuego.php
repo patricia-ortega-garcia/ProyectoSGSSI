@@ -31,13 +31,13 @@ if (isset($_GET['id'])) {
     }
 
     // Crea la consulta SQL para insertar el nuevo usuario en la tabla
-    $sql = "SELECT * FROM mytable WHERE id = $videojuegoId";
+    $sql = "SELECT * FROM mytable WHERE id = $videojuegoId"; //FALTA PARAMETRIZAR LA CONSULTA
     
 
     // Prepara la consulta SQL
     //Verificar que la función 'mysqli_prepare' haya tenido éxito
     
-    $result = $conn->query($sql);
+    $result = $conn->query($sql); 
     
     if ($result->num_rows > 0){
         $row = $result->fetch_assoc();

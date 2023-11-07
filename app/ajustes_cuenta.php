@@ -18,6 +18,7 @@ mysqli_stmt_bind_param($stmt, "ss", $usuario, $dni);
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
 $datosUsuario = mysqli_fetch_assoc($resultado);
+/*Meter lo de descifrar*/
 $nm = $datosUsuario["nombre"];
 $ap = $datosUsuario["apellidos"];
 $tlf = $datosUsuario["telefono"];
