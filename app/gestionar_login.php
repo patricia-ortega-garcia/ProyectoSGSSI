@@ -2,7 +2,6 @@
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 
-session_start();
 include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
 
@@ -66,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['dni'] = $dni;
             
                     #$sesion=mysqli_fetch_array($usuario);
-                    header("Location: principal.php"); // Redirige a la página de inicio
+                    //header("Location: principal.php"); // Redirige a la página de inicio
                 } else {
                     // Credenciales incorrectas
                     // echo "Credenciales incorrectas...";
