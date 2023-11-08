@@ -1,4 +1,5 @@
 <?php
+session_start();
     header("X-Frame-Options: SAMEORIGIN");
     header("X-Content-Type-Options: nosniff");
 
@@ -20,6 +21,13 @@
             <h2>Inicia sesión en Goodgames</h2>
             <!-- <p>Nombre de usuario</p> 
             <p>Contraseña</p> -->
+            <?php
+                if (isset($_SESSION["mensaje"])) {
+                    echo $_SESSION["mensaje"];
+                    unset($_SESSION["mensaje"]); // Borra el mensaje para que no se muestre de nuevo
+            }
+            ?>
+            <pre>   </pre>
             <form id="inicio-sesion-form" action="gestionar_login.php" method="POST">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>

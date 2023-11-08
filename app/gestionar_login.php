@@ -6,6 +6,8 @@ session_start();
 include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
     $usuario = cifrar($_POST["username"]);
@@ -98,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Cierra la conexión y la declaración
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
+    }
 }
 
     /* Validar contraseña con hash:

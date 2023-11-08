@@ -69,37 +69,25 @@ $result = $conn->query($sql);
              $fila = $result->fetch_assoc();
             $totalPaginas = ceil($fila["total"] / $porPagina);
 
-            // Mostrar enlaces de paginación
-            echo "<div>";
-            for ($i = 1; $i <= $totalPaginas; $i++) {
-                if ($i == $pagina) {
-                    echo "<strong>$i</strong> ";
-                } else {
-                    echo "<a href='?pagina=$i'>$i</a> ";
-                }
-            }
-            echo "</div>";
+           
                 ?>
                 </table>
-            <!--  <form id="catalogo-videojuegos-form" action="buscar_videojuego.php" method="POST"> -->
-            <!-- <label for="nombre">Nombre:</label> -->
-               <!--  <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br>
-
-                <label for="creador">Creador:</label>
-                <input type="text" id="creador" name="creador" placeholder="Creador" required><br>
-
-                <label for="productora">Productora:</label>
-                <input type="text" id="productora" name="productora" placeholder="Productora" required><br>
-
-                <label for="genero">Género:</label>
-                <input type="text" id="genero" name="genero" placeholder="Género" required><br>
-
-                <label for="sistema_operativo">Sistema operativo:</label>
-                <input type="text" id="sistema_operativo" name="sistema_operativo" placeholder="Sistema operativo" required><br>
-
-                <label for="fecha_lanzamiento">Fecha lanzamiento:</label>
-                <input type="text" id="fecha_lanzamiento" name="fecha_lanzamiento" placeholder="Fecha lanzamiento" required><br>
-               button type="submit">Iniciar Sesión </button> -->
+                <br> </br>
+            <?php
+                // Mostrar enlaces de paginación
+             echo "<div>";
+             for ($i = 1; $i <= $totalPaginas; $i++) {
+                 if ($i == $pagina) {
+                     echo "<strong>$i</strong> ";
+                 } else {
+                     echo "<a href='?pagina=$i'>$i</a> ";
+                 }
+             }
+            if ($pagina < $totalPaginas) {
+                echo "<a href='?pagina=".($pagina + 1)."'>Siguiente</a>";
+            }
+                
+             ?>
 
                 <pre>     </pre>
                 <div class="button-container">
