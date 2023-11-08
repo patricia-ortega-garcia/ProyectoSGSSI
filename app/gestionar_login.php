@@ -49,18 +49,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             #$sesion=mysqli_fetch_array($usuario);
             header("Location: principal.php"); // Redirige a la página de inicio
-            exit();
         } else {
             // Credenciales incorrectas
-            $_SESSION["mensaje"] = "Credenciales incorrectas. Por favor, inténtelo de nuevo.";
-            header("Location: index.php");
-            exit();
+            if ($_SESSION['intentosIncorrectos'] == ''){
+                $_SESSION['intentosIncorrectos'] = 1;
+            }
+            else{
+                $_SESSION['intentosIncorrectos'] = $_SESSION['intentosIncorrectos'] + 1;
+                error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER["REMOTE_ADDR"]." --> ERROR de autentificación password o nombre de user incorrectos. Intentos gastados: ".$_SESSION["intentosIncorrectos"]."/5 \n", 3, "logs.log");
+
+                if ($_SESSION['intentosIncorrectos'] == 5) {
+                    error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Redirección a dirección antibotting. \n", 3, "logs.log");
+                    echo "<script> window.location.replace('http://localhost:81/control5veces.php'); </script> ";
+                } else {
+                    echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
+                }
+            }
+        exit();
+           // header("Location: index.php");
+            //exit();
         }
-    } else {
-        echo "Error al ejecutar la consulta: " . mysqli_error($conn);
-    }
 
     // Cierra la conexión y la declaración
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
+    }
 }
