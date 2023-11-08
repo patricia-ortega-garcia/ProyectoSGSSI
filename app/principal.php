@@ -2,6 +2,11 @@
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 
+session_start();
+if (!$_SESSION['identificado']){
+    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
+}
+
 include("config.php"); // Incluye el archivo de configuración
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
 if (!$conn) {

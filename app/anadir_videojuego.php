@@ -3,7 +3,10 @@ header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 
 include("config.php"); // Incluye el archivo de configuración
-
+session_start();
+if (!$_SESSION['identificado']){
+    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
     $nombre = $_POST["nombre"];

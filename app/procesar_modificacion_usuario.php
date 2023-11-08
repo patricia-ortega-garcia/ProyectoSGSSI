@@ -5,6 +5,9 @@ header("X-Content-Type-Options: nosniff");
 
 include("config.php");
 session_start();
+if (!$_SESSION['identificado']){
+    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
+}
 
 // Verificar si el usuario está autenticado; si no, redirigirlo a la página de inicio de sesión
 if (!isset($_SESSION['usuario'])) {

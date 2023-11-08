@@ -3,7 +3,10 @@ header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 
 
-  session_start(); 
+session_start();
+if (!$_SESSION['identificado']){
+    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
+}
     if ($_SESSION['incorrectosSeguidos'] == 5) {
         $_SESSION['incorrectosSeguidos'] = 0;
     	echo "<h1> ¡Ups! </h1>";
