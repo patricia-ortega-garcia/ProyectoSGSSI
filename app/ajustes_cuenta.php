@@ -1,4 +1,7 @@
 <?php
+header("X-Frame-Options: SAMEORIGIN");
+header("X-Content-Type-Options: nosniff");
+
 // Incluir archivo de configuración y verificar la sesión del usuario (debes implementar la lógica de autenticación)
 include("config.php");
 session_start();
@@ -18,6 +21,7 @@ mysqli_stmt_bind_param($stmt, "ss", $usuario, $dni);
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
 $datosUsuario = mysqli_fetch_assoc($resultado);
+/*Meter lo de descifrar*/
 $nm = $datosUsuario["nombre"];
 $ap = $datosUsuario["apellidos"];
 $tlf = $datosUsuario["telefono"];

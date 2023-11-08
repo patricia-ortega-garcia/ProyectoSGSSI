@@ -1,10 +1,14 @@
 <?php
+header("X-Frame-Options: SAMEORIGIN");
+header("X-Content-Type-Options: nosniff");
+
 session_start();
 include("config.php"); // Incluye el archivo de configuración
+include("funciones.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
-    $nombre = $_POST["nombre"];
+    /*$nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
     $dni = $_POST["dni"];
     $telefono = $_POST["telefono"];
@@ -12,8 +16,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $usuario = $_POST["username"];
     $contraseña = $_POST["password"];
+    */
+    $nombre = cifrar($_POST["nombre"]);
+    $apellidos = cifrar($_POST["apellidos"]);
+    $dni = cifrar($_POST["dni"]);
+    $telefono = cifrar($_POST["telefono"]);
+    $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
+    $email = cifrar($_POST["email"]);
+    $usuario = cifrar($_POST["username"]);
+    $contraseña = $_POST["password"];
+    $sal = "";
 
-
+    $cont = 0;
+    while ($cont < 10) {
+  	    $sal = $sal.chr(random_int(65, 90));
+  	$cont++;
+    }
+    
+    $contraseña_sal = $contraseña.$sal;
+    $hash_contraseña = hash('sha256',$contraseña_sal);*/ //No me funciona el hash
     //Validar parametros (Falta hacer)
 
 
@@ -24,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Crea la consulta SQL para insertar el nuevo usuario en la tabla
-    $sql = "INSERT INTO usuarios (nombre, apellidos, dni, telefono, fecha_nacimiento, email, usuario, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios_cod (nombre, apellidos, dni, telefono, fecha_nacimiento, email, username, sal, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepara la consulta SQL
     $stmt = mysqli_prepare($conn, $sql);
@@ -35,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Asocia los parámetros con los valores
-    mysqli_stmt_bind_param($stmt, "ssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $contraseña);
+    mysqli_stmt_bind_param($stmt, "sssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $sal, $hash_contraseña); /*$hash_contraseña*/
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {
@@ -43,10 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["usuario"] = $usuario;
         $_SESSION["dni"] = $dni;
-        header("Location: principal.php");
+        echo "<h1> ¡Felicidades! </h1>";
+        error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Se ha creado el user con identificador ".$_POST['usuario']." \n", 3, "logs.log");
+        //header("Location: principal.php");
         exit();
     } else {
-        //echo "Error al registrar el usuario: " . mysqli_error($conn);
+        echo "Error al registrar el usuario: " . mysqli_error($conn);
     }
 
     // Cierra la conexión y la declaración
