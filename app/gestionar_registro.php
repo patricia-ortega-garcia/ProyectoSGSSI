@@ -34,10 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     $contraseña_sal = $contraseña.$sal;
-    $hash_contraseña = "";
-    $hash_contraseña = hash('sha256', $contraseña_sal, false);
-    echo $hash_contraseña;
-
+    $hash_contraseña = hash('sha256',$contraseña_sal);*/ //No me funciona el hash
     //Validar parametros (Falta hacer)
 
 
@@ -48,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Crea la consulta SQL para insertar el nuevo usuario en la tabla
-    $sql = "INSERT INTO usuarios (nombre, apellidos, dni, telefono, fecha_nacimiento, email, usuario, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios_cod (nombre, apellidos, dni, telefono, fecha_nacimiento, email, username, sal, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepara la consulta SQL
     $stmt = mysqli_prepare($conn, $sql);
@@ -59,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Asocia los parámetros con los valores
-    mysqli_stmt_bind_param($stmt, "ssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $contraseña);
+    mysqli_stmt_bind_param($stmt, "sssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $sal, $hash_contraseña); /*$hash_contraseña*/
 
     // Ejecuta la consulta SQL
     if (mysqli_stmt_execute($stmt)) {
@@ -72,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //header("Location: principal.php");
         exit();
     } else {
-        //echo "Error al registrar el usuario: " . mysqli_error($conn);
+        echo "Error al registrar el usuario: " . mysqli_error($conn);
     }
 
     // Cierra la conexión y la declaración
