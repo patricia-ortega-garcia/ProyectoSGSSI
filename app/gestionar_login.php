@@ -7,7 +7,6 @@ include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
 
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
     $usuario = cifrar($_POST["username"]);
@@ -64,6 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     session_start();
                     $_SESSION["usuario"] = $usuario;
                     $_SESSION['dni'] = $dni;
+                    $_SESSION['identificado'] = true;
+
             
                     #$sesion=mysqli_fetch_array($usuario);
                     header("Location: principal.php"); // Redirige a la página de inicio

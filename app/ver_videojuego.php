@@ -5,6 +5,7 @@ header_remove("X-Powered-By");
 
 include("config.php"); // Incluye el archivo de configuración
 session_start();
+
 ?>
 
 <!DOCTYPE html>

@@ -19,6 +19,10 @@ header_remove("X-Powered-By");
     <main>
 <?php
 session_start();
+if (!$_SESSION['identificado']){
+    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
+}
+
 // Establece la conexión a la base de datos aquí
 include("config.php"); // Incluye el archivo de configuración
 
