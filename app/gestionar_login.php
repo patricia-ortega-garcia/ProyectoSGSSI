@@ -1,6 +1,7 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
 session_start();
 include("config.php"); // Incluye el archivo de configuración
@@ -67,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
                     #$sesion=mysqli_fetch_array($usuario);
                     header("Location: principal.php"); // Redirige a la página de inicio
+                    die(); //redireccion segura
                 } else {
                     // Credenciales incorrectas
                     // echo "Credenciales incorrectas...";
@@ -90,10 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         else {
+            error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER["REMOTE_ADDR"]." --> ERROR: Intento de inicio de sesión con usuario no existente", 3, "logs.log");
+            header("Location: index.php");
+            die();
             echo "Error: No existe el usuario";
         }
     }
     else {
+        error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER["REMOTE_ADDR"]." --> ERROR: Intento de inicio de sesión con usuario no existente", 3, "logs.log");
+        header("Location: index.php");
+        die();
         echo "No existe el usuario";
     }
 

@@ -1,6 +1,10 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
+
+include("config.php"); // Incluye el archivo de configuración
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ header("X-Content-Type-Options: nosniff");
         <section>
 
 <?php
-include("config.php"); // Incluye el archivo de configuración
+
 
 if (isset($_GET['id'])) {
     $videojuegoId = $_GET['id'];
