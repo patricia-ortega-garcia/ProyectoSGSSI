@@ -1,12 +1,6 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
-header_remove("X-Powered-By");
-
-session_start();
-if (!$_SESSION['identificado']){
-    echo "<script> window.location.replace('http://localhost:81'); </script> "; 
-}
 
 include("config.php"); // Incluye el archivo de configuración
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
@@ -97,9 +91,9 @@ $result = $conn->query($sql);
 
                 <pre>     </pre>
                 <div class="button-container">
-                    <button class="button secondary-button" onclick="window.location.href='buscar_juegos.php'">Buscar videojuegos</button>
+                    <button class="button secondary-button" onclick="window.location.href='buscar_juegos.html'">Buscar videojuegos</button>
                     <pre>     </pre>
-                    <button class="button secondary-button" onclick="window.location.href='anadir_videojuego.php'">Añadir videojuego</button>
+                    <button class="button secondary-button" onclick="window.location.href='anadir_videojuego.html'">Añadir videojuego</button>
                 </div>
 
             <!--  </form> -->

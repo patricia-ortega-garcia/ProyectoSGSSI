@@ -1,7 +1,6 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
-header_remove("X-Powered-By");
 
 session_start();
 include("config.php"); // Incluye el archivo de configuración
@@ -67,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["dni"] = $dni;
         echo "<h1> ¡Felicidades! </h1>";
         error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Se ha creado el user con identificador ".$_POST['usuario']." \n", 3, "logs.log");
-        header("Location: principal.php");
+        //header("Location: principal.php");
         exit();
     } else {
         echo "Error al registrar el usuario: " . mysqli_error($conn);

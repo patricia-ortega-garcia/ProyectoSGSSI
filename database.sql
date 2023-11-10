@@ -1146,22 +1146,22 @@ INSERT INTO `mytable` (`id`, `Name`, `Developer`, `Producer`, `Genre`, `Operatin
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE usuarios_cod (
-    nombre VARCHAR(100) NOT NULL,
-    apellidos VARCHAR(100) NOT NULL,
-    dni VARCHAR(100) NOT NULL,
-    telefono VARCHAR(100)  NOT NULL,
-    fecha_nacimiento VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    username VARCHAR(100) PRIMARY KEY NOT NULL,
-    sal VARCHAR(10) NOT NULL,
-    password VARCHAR(255) NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `usuarios` (
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `dni` varchar(9) NOT NULL,
+  `telefono` int(9) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nacimiento`, `email`, `usuario`, `contraseña`) VALUES ('Ana', 'García', '99999999R', 600000000, '2023-10-14', 'ejemplo@gmail.com', 'Anita', 'contraseña1234');
 
 --
 -- Índices para tablas volcadas
@@ -1176,6 +1176,8 @@ ALTER TABLE `mytable`
 --
 -- Indices de la tabla `usuarios`
 --
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`dni`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
