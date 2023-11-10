@@ -1,7 +1,8 @@
-
 <?php
+session_start();
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,7 +18,10 @@ header("X-Content-Type-Options: nosniff");
     </header>
     <main>
 <?php
-session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    exit();
+}
 // Establece la conexión a la base de datos aquí
 include("config.php"); // Incluye el archivo de configuración
 

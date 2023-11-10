@@ -1,9 +1,14 @@
 <?php 
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
-
+header_remove("X-Powered-By");
 
   session_start(); 
+
+    if (!isset($_SESSION["usuario"])) {
+        header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+        exit();
+    }
     if ($_SESSION['incorrectosSeguidos'] == 5) {
         $_SESSION['incorrectosSeguidos'] = 0;
     	echo "<h1> ¡Ups! </h1>";

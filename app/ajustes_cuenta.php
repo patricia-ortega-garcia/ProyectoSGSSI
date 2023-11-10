@@ -1,9 +1,11 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
 // Incluir archivo de configuración y verificar la sesión del usuario (debes implementar la lógica de autenticación)
 include("config.php");
+include("funciones.php");
 session_start();
 
 // Verificar la sesión del usuario (debes implementar esta lógica)
@@ -15,9 +17,9 @@ if (!isset($_SESSION["usuario"])) {
 // Recuperar información del usuario desde la base de datos (debes implementar esta lógica)
 $usuario = $_SESSION["usuario"];
 $dni = $_SESSION["dni"];
-$sql = "SELECT * FROM usuarios WHERE usuario = ? AND dni = ?";
+$sql = "SELECT * FROM usuarios_cod WHERE username = ? /*AND dni = ?*/";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "ss", $usuario, $dni);
+mysqli_stmt_bind_param($stmt, "s", $usuario);/*, $dni);*/
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
 $datosUsuario = mysqli_fetch_assoc($resultado);
@@ -27,6 +29,14 @@ $ap = $datosUsuario["apellidos"];
 $tlf = $datosUsuario["telefono"];
 $em = $datosUsuario["email"];
 $fn = $datosUsuario["fecha_nacimiento"];
+
+$sal = "";
+
+$cont = 0;
+while ($cont < 10) {
+      $sal = $sal.chr(random_int(65, 90));
+  $cont++;
+}
 
 if ($resultado) {
     $datosUsuario = mysqli_fetch_assoc($resultado);
@@ -40,33 +50,33 @@ mysqli_stmt_close($stmt);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
-    $nombre = $_POST["nombre"];
-    $apellidos = $_POST["apellidos"];
-    $telefono = $_POST["telefono"];
-    $fecha_nacimiento = $_POST["fecha_nacimiento"];
-    $email = $_POST["email"];
-    $usuario = $_POST["username"];
+    $nombre = cifrar($_POST["nombre"]);
+    $apellidos = cifrar($_POST["apellidos"]);
+    $telefono = cifrar($_POST["telefono"]);
+    $fecha_nacimiento = cifrar($_POST["fecha_nacimiento"]);
+    $email = cifrar($_POST["email"]);
+    /*$usuario = $_POST["username"];*/ //Hay que poner el DNI
     $password = $_POST["password"];
-    $actual=$_SESSION["dni"];
+    $actual=$_SESSION["usuario"];
 
-    $nombresql="UPDATE usuarios SET nombre='$nombre' WHERE dni='$actual' ";
-    $apellidossql="UPDATE usuarios SET apellidos='$apellidos' WHERE dni='$actual' ";
-    $telefonosql="UPDATE usuarios SET telefono='$telefono' WHERE dni='$actual' ";
-    $fechasql="UPDATE usuarios SET fecha_nacimiento='$fecha_nacimiento' WHERE dni='$actual' ";
-    $emailsql="UPDATE usuarios SET email='$email' WHERE dni='$actual' ";
-    $usuariosql="UPDATE usuarios SET usuario='$usuario' WHERE dni='$actual' ";
-    $contrasenasql="UPDATE usuarios SET contraseña='$password' WHERE dni='$actual' ";
+    $nombresql="UPDATE usuarios_cod SET nombre='$nombre' WHERE username='$actual' ";
+    $apellidossql="UPDATE usuarios_cod SET apellidos='$apellidos' WHERE username='$actual' ";
+    $telefonosql="UPDATE usuarios_cod SET telefono='$telefono' WHERE username='$actual' ";
+    $fechasql="UPDATE usuarios_cod SET fecha_nacimiento='$fecha_nacimiento' WHERE username='$actual' ";
+    $emailsql="UPDATE usuarios_cod SET email='$email' WHERE username='$actual' ";
+    //$usuariosql="UPDATE usuarios_cod SET dni='$dni' WHERE dni='$actual' ";
+    $contrasenasql="UPDATE usuarios_cod SET contraseña='$password' WHERE username='$actual' ";
 
-    if(!empty($usuario)){
+    /*if(!empty($usuario)){ //Haria falta hacerlo con el DNI
         $ejecutar1=mysqli_query($conn,$usuariosql);
         if($ejecutar1){
-        /*Cerrar sesion*/
+        //Cerrar sesion
           $_SESSION['usuario']=$usuario;
           ?> 
           <h3 class="bien">¡Nombre de usuario modificado correctamente!</h3>
             <?php
         }
-    }
+    }*/
     
     if(!empty($nombre)){
         $ejecutar2=mysqli_query($conn,$nombresql);
@@ -156,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
     <main>
         <section>
-            <h2>¡Bienvenido <?php echo $_SESSION['usuario']?>!</h2>
+            <h2>¡Bienvenido <?php echo descifrar($_SESSION['usuario'])?>!</h2>
             <h3>Información a cambiar: </h3>
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">

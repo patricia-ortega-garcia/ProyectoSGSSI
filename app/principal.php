@@ -17,6 +17,11 @@ $inicio = ($pagina - 1) * $porPagina;
 $sql = "SELECT * FROM mytable LIMIT $inicio, $porPagina";
 $result = $conn->query($sql);
 
+session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    exit();
+}
 
 
 ?>

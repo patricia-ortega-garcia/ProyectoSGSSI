@@ -1,8 +1,15 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
 include("config.php"); // Incluye el archivo de configuración
+
+session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario

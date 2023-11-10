@@ -1,6 +1,7 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
 function cifrar($dato) {
 	$puntero = fopen("clave_simetrica.txt", "r");
