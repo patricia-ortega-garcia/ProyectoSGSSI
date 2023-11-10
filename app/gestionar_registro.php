@@ -1,8 +1,9 @@
 <?php
+session_start();
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
-session_start();
 include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
 
@@ -34,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     $contraseña_sal = $contraseña.$sal;
-    $hash_contraseña = hash('sha256',$contraseña_sal);*/ //No me funciona el hash
+    $hash_contraseña = hash('sha256',$contraseña_sal); //No me funciona el hash
     //Validar parametros (Falta hacer)
 
 

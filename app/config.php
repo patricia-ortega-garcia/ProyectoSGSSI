@@ -1,7 +1,7 @@
 <?php
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
-
+header_remove("X-Powered-By");
 
 /*
 $servername = "localhost"; // Cambia esto al nombre del servidor si es diferente
@@ -21,8 +21,8 @@ if (!$conn) {
 
 // phpinfo();
   $hostname = "db";
-  $username = "admin";
-  $password = "test";
+  $username = "admin";//"administradoresroot";
+  $password = "test";//"ProyectoSGSSI#2023";
   $db = "database";
 
   $conn = mysqli_connect($hostname,$username,$password,$db);
