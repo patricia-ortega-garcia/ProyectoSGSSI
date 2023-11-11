@@ -5,10 +5,12 @@ header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 header_remove("X-Powered-By");
 
-if (!isset($_SESSION["usuario"])) {
-    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+// Verificar si el usuario está autenticado; si no, redirigirlo a la página de inicio de sesión
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>

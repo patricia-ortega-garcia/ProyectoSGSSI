@@ -1,13 +1,19 @@
 <?php
+session_start();
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
+header_remove("X-Powered-By");
 
 include("config.php"); // Incluye el archivo de configuración
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
 if (!$conn) {
     die("La conexión a la base de datos falló: " . mysqli_connect_error());
 }
-
+// Verificar la sesión del usuario (debes implementar esta lógica)
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    exit();
+}
 // Parámetros para la paginación
 $porPagina = 10; // Número de elementos por página
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
