@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //$contaseña_sal = "";
             //$hash_contraseña = "";
             $contraseña_sal = $contraseña.$sal;
-            $hash_contraseña = "f2ac777d7cd0a419a576f4f792f84c35e6ac5a335d69230166a221884144698d"; /*hash('sha256', $contraseña_sal); /*No me funciona el hash*/
+            $hash_contraseña = "c7c237b933f9d3bf15c8afbaabb16688a6319c2be746b18f7a107c452b6c4af4"; /*hash('sha256', $contraseña_sal); /*No me funciona el hash*/
             $sql2 = "SELECT * FROM usuarios_cod WHERE username = ? AND password = ?";
             $stmt2 = mysqli_prepare($conn, $sql2);
             if (!$stmt2) {
