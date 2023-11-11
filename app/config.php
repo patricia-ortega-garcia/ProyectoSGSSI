@@ -7,11 +7,6 @@ session_start();
 
 // Iniciar sesión
 
-// Verificar la sesión del usuario
-if (!isset($_SESSION["usuario"])) {
-    header("Location: index.php"); // Redirigir si no está autenticado
-    exit();
-}
 
 // Conexión a la base de datos
 $hostname = "db";
