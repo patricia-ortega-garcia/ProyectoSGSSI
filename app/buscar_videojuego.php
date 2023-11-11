@@ -13,6 +13,11 @@ if (!isset($_SESSION["usuario"])) {
 
 include("config.php"); // Incluye el archivo de configuración
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
+session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario

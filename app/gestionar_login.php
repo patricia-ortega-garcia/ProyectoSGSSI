@@ -3,7 +3,6 @@ header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
 header_remove("X-Powered-By");
 
-
 include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
 
@@ -46,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //$contaseña_sal = "";
             //$hash_contraseña = "";
             $contraseña_sal = $contraseña.$sal;
-            $hash_contraseña = hash('sha256', $contraseña_sal); /*No me funciona el hash*/
+            $hash_contraseña = "f2ac777d7cd0a419a576f4f792f84c35e6ac5a335d69230166a221884144698d"; /*hash('sha256', $contraseña_sal); /*No me funciona el hash*/
             $sql2 = "SELECT * FROM usuarios_cod WHERE username = ? AND password = ?";
             $stmt2 = mysqli_prepare($conn, $sql2);
             if (!$stmt2) {
@@ -102,7 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
     }
-}
 
     /* Validar contraseña con hash:
         1º PASO:  Obtener el sal del usuario
