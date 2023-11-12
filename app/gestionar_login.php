@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($resultado) === 1) {
             $row = $resultado->fetch_assoc();
             $hash_contr = $row['password']; // Puedes ajustar el formato según tus necesidades
-
-            if (password_verify($contr, $hash_contr)) { // Inicio de sesión exitoso
+            $dni_cifr = $row['dni'];
+            if (password_verify($contr, $hash_contr) && $dni == $dni_cifr) { // Inicio de sesión exitoso
                 
                     $_SESSION["usuario"] = $usuario;
                     header("Location: principal.php"); // Redirige a la página de inicio
