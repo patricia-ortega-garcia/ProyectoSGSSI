@@ -170,19 +170,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="<?php echo $nm; ?>"><br>
+                <input type="text" id="nombre" name="nombre" placeholder="<?php echo descifrar($nm); ?>"><br>
 
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" placeholder="<?php echo $ap; ?>"><br>
+                <input type="text" id="apellidos" name="apellidos" placeholder="<?php echo descifrar($ap); ?>"><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" placeholder="<?php echo $tlf; ?>"><br>
+                <input type="text" id="telefono" name="telefono" placeholder="<?php echo descifrar($tlf); ?>"><br>
 
                 <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="<?php echo $fn; ?>"><br>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="<?php echo descifrar($fn); ?>"><br>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="<?php echo $em; ?>"><br>
+                <input type="email" id="email" name="email" placeholder="<?php echo descifrar($em); ?>"><br>
 
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username"><br>
