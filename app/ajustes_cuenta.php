@@ -22,13 +22,14 @@ $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "s", $usuario);/*, $dni);*/
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
-$datosUsuario = mysqli_fetch_assoc($resultado);
+//$datosUsuario = mysqli_fetch_assoc($resultado);
+$datosUsuario = $resultado->fetch_assoc();
 /*Meter lo de descifrar*/
-$nm = $datosUsuario["nombre"];
-$ap = $datosUsuario["apellidos"];
-$tlf = $datosUsuario["telefono"];
-$em = $datosUsuario["email"];
-$fn = $datosUsuario["fecha_nacimiento"];
+$nm = descifrar($datosUsuario["nombre"]);
+$ap = descifrar($datosUsuario["apellidos"]);
+$tlf = descifrar($datosUsuario["telefono"]);
+$em = descifrar($datosUsuario["email"]);
+$fn = descifrar($datosUsuario["fecha_nacimiento"]);
 
 $sal = "";
 
@@ -103,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($telefono)){
         mysqli_stmt_bind_param($telefonostmt, "ss", $telefono, $actual);
         //$ejecutar3=mysqli_query($conn,$telefonosql);
-        if($mysqli_stmt_execute($telefonostmt)){
+        if(mysqli_stmt_execute($telefonostmt)){
             ?> 
             <h3 class="bien">¡Telefono modificado correctamente!</h3>
             <?php
@@ -113,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($fecha_nacimiento)){
         mysqli_stmt_bind_param($fechastmt, "ss", $fecha_nacimiento, $actual);
         //$ejecutar4=mysqli_query($conn,$fechasql);
-        if($mysqli_stmt_execute($fechastmt)){
+        if(mysqli_stmt_execute($fechastmt)){
             ?> 
             <h3 class="bien">¡Fecha modificada correctamente!</h3>
             <?php
@@ -123,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($email)){
         mysqli_stmt_bind_param($emailstmt, "ss", $email, $actual);
         //$ejecutar5=mysqli_query($conn,$emailsql);
-        if($mysqli_stmt_execute($emailstmt)){
+        if(mysqli_stmt_execute($emailstmt)){
             ?> 
                 <h3 class="bien">¡Email modificado correctamente!</h3>
                     <?php
@@ -133,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($password)){
         mysqli_stmt_bind_param($contrasenastmt, "ss", $password, $actual);
         //$ejecutar6=mysqli_query($conn,$contrasenasql);
-        if($mysqli_stmt_execute($contrasenastmt)){
+        if(mysqli_stmt_execute($contrasenastmt)){
             ?> 
                 <h3 class="bien">¡Contraseña modificada correctamente!</h3>
                     <?php
@@ -170,19 +171,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="<?php echo descifrar($nm); ?>"><br>
+                <input type="text" id="nombre" name="nombre" placeholder="<?php echo $nm; ?>"><br>
 
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" placeholder="<?php echo descifrar($ap); ?>"><br>
+                <input type="text" id="apellidos" name="apellidos" placeholder="<?php echo $ap; ?>"><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" placeholder="<?php echo descifrar($tlf); ?>"><br>
+                <input type="text" id="telefono" name="telefono" placeholder="<?php echo $tlf; ?>"><br>
 
                 <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="<?php echo descifrar($fn); ?>"><br>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="<?php echo $fn; ?>"><br>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="<?php echo descifrar($em); ?>"><br>
+                <input type="email" id="email" name="email" placeholder="<?php echo $em; ?>"><br>
 
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username"><br>
