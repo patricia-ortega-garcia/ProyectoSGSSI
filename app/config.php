@@ -8,20 +8,20 @@ header_remove("X-Powered-By");
 
 // Conexión a la base de datos
 $hostname = "db";
-$username = "admin";
-$password = "test";
+$username = "administradoresroot";
+$password = "ProyectoSGSSI#2023";
 $db = "database";
 
 $conn = mysqli_connect($hostname, $username, $password, $db);
 if ($conn->connect_error) {
     die("La conexión a la base de datos falló: " . $conn->connect_error);
 }
-*/
+
 
 // phpinfo();
   $hostname = "db";
-  $username = "admin";//"administradoresroot";
-  $password = "test";//"ProyectoSGSSI#2023";
+  $username = "administradoresroot";
+  $password = "ProyectoSGSSI#2023";
   $db = "database";
 
   $conn = mysqli_connect($hostname,$username,$password,$db);
