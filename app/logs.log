@@ -113,3 +113,7 @@ Fecha: 12-11-2023, 16:52:15 | IP: 172.17.0.1 --> ERROR de autentificación passw
 Fecha: 12-11-2023, 16:52:15 | IP: 172.17.0.1 --> Redirección a dirección antibotting. 
 Fecha: 12-11-2023, 16:57:06 | IP: 172.17.0.1 --> ERROR de autentificación password o nombre de user incorrectos. Intentos gastados: 2/5 
 Fecha: 12-11-2023, 16:57:37 | IP: 172.17.0.1 --> ERROR de autentificación password o nombre de user incorrectos. Intentos gastados: 3/5 
+<<<<<<< HEAD
+=======
+Fecha: 18-11-2023, 16:39:24 | IP: 172.17.0.1 --> Se ha creado el user con identificador  
+>>>>>>> main
