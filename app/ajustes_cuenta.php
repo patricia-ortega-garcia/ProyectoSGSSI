@@ -7,6 +7,7 @@ header_remove("X-Powered-By");
 // Incluir archivo de configuración y verificar la sesión del usuario (debes implementar la lógica de autenticación)
 include("config.php");
 include("funciones.php");
+include("comprobar_contraseña.php")
 
 // Verificar la sesión del usuario (debes implementar esta lógica)
 if (!isset($_SESSION["usuario"])) {
@@ -45,7 +46,6 @@ if ($resultado) {
     echo "Error al recuperar la información del usuario: " . mysqli_error($conn);
 }
 
-
 mysqli_stmt_close($stmt);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,6 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /*$usuario = $_POST["username"];*/ //Hay que poner el DNI
     $password = $_POST["password"];
     //$actual=$_SESSION["usuario"];
+
+    if (comprobar($password)) {
+        die("La contraseña es muy mala, cambiala");
+    }
 
     $nombresql="UPDATE usuarios_cod SET nombre=? WHERE username=? ";
     $nombrestmt=mysqli_prepare($conn, $nombresql);
@@ -74,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailsql="UPDATE usuarios_cod SET email=? WHERE username=? ";
     $emailstmt=mysqli_prepare($conn, $emailsql);
 
-<<<<<<< HEAD
     $nombresql="UPDATE usuarios_cod SET nombre=? WHERE username=? ";
     $nombrestmt=mysqli_prepare($conn, $nombresql);
 
@@ -98,16 +101,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if(!empty($nombre)){
         mysqli_stmt_bind_param($nombrestmt, "ss", $nombre, $actual);
-=======
-    //$usuariosql="UPDATE usuarios_cod SET dni='$dni' WHERE dni='$actual' ";
-    $contrasenasql="UPDATE usuarios_cod SET contraseña=? WHERE username=? ";
-    $contrasenastmt=mysqli_prepare($conn, $contrasenasql);
-
+        //$usuariosql="UPDATE usuarios_cod SET dni='$dni' WHERE dni='$actual' ";
+        $contrasenasql="UPDATE usuarios_cod SET contraseña=? WHERE username=? ";
+        $contrasenastmt=mysqli_prepare($conn, $contrasenasql);
+    }
     
     
     if(!empty($nombre)){
         mysqli_stmt_bind_param($nombrestmt, "ss", $nombre, $usuario);
->>>>>>> main
         //$ejecutar2=mysqli_query($conn,$nombresql);
         if(mysqli_stmt_execute($nombrestmt)){
           ?> 
@@ -117,11 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if(!empty($apellidos)){
-<<<<<<< HEAD
         mysqli_stmt_bind_param($apellidosstmt, "ss", $apellidos, $actual);
-=======
         mysqli_stmt_bind_param($apellidosstmt, "ss", $apellidos, $usuario);
->>>>>>> main
         //$ejecutar7=mysqli_query($conn,$apellidossql);
         if(mysqli_stmt_execute($apellidosstmt)){
           ?> 
@@ -131,15 +129,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(!empty($telefono)){
-<<<<<<< HEAD
         mysqli_stmt_bind_param($telefonostmt, "ss", $telefono, $actual);
         //$ejecutar3=mysqli_query($conn,$telefonosql);
-        if($mysqli_stmt_execute($telefonostmt)){
-=======
         mysqli_stmt_bind_param($telefonostmt, "ss", $telefono, $usuario);
         //$ejecutar3=mysqli_query($conn,$telefonosql);
         if(mysqli_stmt_execute($telefonostmt)){
->>>>>>> main
             ?> 
             <h3 class="bien">¡Telefono modificado correctamente!</h3>
             <?php
@@ -147,15 +141,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(!empty($fecha_nacimiento)){
-<<<<<<< HEAD
         mysqli_stmt_bind_param($fechastmt, "ss", $fecha_nacimiento, $actual);
         //$ejecutar4=mysqli_query($conn,$fechasql);
         if($mysqli_stmt_execute($fechastmt)){
-=======
         mysqli_stmt_bind_param($fechastmt, "ss", $fecha_nacimiento, $usuario);
         //$ejecutar4=mysqli_query($conn,$fechasql);
-        if(mysqli_stmt_execute($fechastmt)){
->>>>>>> main
             ?> 
             <h3 class="bien">¡Fecha modificada correctamente!</h3>
             <?php
@@ -163,15 +153,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(!empty($email)){
-<<<<<<< HEAD
         mysqli_stmt_bind_param($emailstmt, "ss", $email, $actual);
         //$ejecutar5=mysqli_query($conn,$emailsql);
         if($mysqli_stmt_execute($emailstmt)){
-=======
         mysqli_stmt_bind_param($emailstmt, "ss", $email, $usuario);
         //$ejecutar5=mysqli_query($conn,$emailsql);
-        if(mysqli_stmt_execute($emailstmt)){
->>>>>>> main
             ?> 
                 <h3 class="bien">¡Email modificado correctamente!</h3>
                     <?php
@@ -179,29 +165,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(!empty($password)){
-<<<<<<< HEAD
         mysqli_stmt_bind_param($contrasenastmt, "ss", $password, $actual);
         //$ejecutar6=mysqli_query($conn,$contrasenasql);
         if($mysqli_stmt_execute($contrasenastmt)){
-=======
-        mysqli_stmt_bind_param($contrasenastmt, "ss", $password, $usuario);
-        //$ejecutar6=mysqli_query($conn,$contrasenasql);
-        if(mysqli_stmt_execute($contrasenastmt)){
->>>>>>> main
             ?> 
                 <h3 class="bien">¡Contraseña modificada correctamente!</h3>
                     <?php
         }
     }
-<<<<<<< HEAD
-
-    mysqli_stmt_close($nombrestmt);
-    mysqli_stmt_close($apellidosstmt);
-    mysqli_stmt_close($telefonostmt);
-    mysqli_stmt_close($fechastmt);
-    mysqli_stmt_close($emailstmt);
-    mysqli_stmt_close($contrasenastmt);
-=======
     if(!empty($nombre)){
         mysqli_stmt_close($nombrestmt);
     }
@@ -220,7 +191,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!empty($password)){
         mysqli_stmt_close($contrasenastmt);
     }
->>>>>>> main
     mysqli_close($conn);
     
 }

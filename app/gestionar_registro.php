@@ -6,6 +6,7 @@ header_remove("X-Powered-By");
 
 include("config.php"); // Incluye el archivo de configuración
 include("funciones.php");
+include("comprobar_contraseña.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera los datos del formulario
@@ -38,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //$hash_contraseña = hash('sha256',$contraseña_sal); //No me funciona el hash
     //Validar parametros (Falta hacer)
 
+    if (comprobar($contraseña)) {
+        die("La contraseña es muy mala, cambiala");
+    }
     $contra_hash = password_hash($contraseña, PASSWORD_DEFAULT);
     
     // Verifica la conexión
@@ -66,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["usuario"] = $usuario;
         $_SESSION["dni"] = $dni;
         echo "<h1> ¡Felicidades! </h1>";
-        error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Se ha creado el user con identificador ".$_POST['usuario']." \n", 3, "logs.log");
+        error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> Se ha registrado el usuario correctamente ".$_POST['usuario']." \n", 3, "logs.log");
         //header("Location: principal.php");
         exit();
     } else {

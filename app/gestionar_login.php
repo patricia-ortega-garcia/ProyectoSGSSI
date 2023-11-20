@@ -42,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hash_contr = $row['password']; // Puedes ajustar el formato según tus necesidades
             $dni_cifr = $row['dni'];
             if (password_verify($contr, $hash_contr) && $dni == $dni_cifr) { // Inicio de sesión exitoso
-                
                     $_SESSION["usuario"] = $usuario;
                     header("Location: principal.php"); // Redirige a la página de inicio
                     exit();
@@ -56,11 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     else {
                         $_SESSION['incorrectosSeguidos'] = $_SESSION['incorrectosSeguidos'] + 1;
             
-                        error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER["REMOTE_ADDR"]." --> ERROR de autentificación password o nombre de user incorrectos. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/5 \n", 3, "logs.log");
+                        error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER["REMOTE_ADDR"]." --> El usuario se ha identificado de manera incorrecta. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/3 \n", 3, "logs.log");
             
-                        if ($_SESSION['incorrectosSeguidos'] == 5) {
-                            error_log("Fecha: ".date("d-m-20y, H:i:s")." | IP: ".$_SERVER['REMOTE_ADDR']." --> Redirección a dirección antibotting. \n", 3, "logs.log");
-                            echo "<script> window.location.replace('http://localhost:81/fallo5veces.php'); </script> ";
+                        if ($_SESSION['incorrectosSeguidos'] == 3) {
+                            error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha fallado la contraseña 3 veces seguidas. \n", 3, "logs.log");
+                            echo "<script> window.location.replace('http://localhost:81/3fallosseguidos.php'); </script> ";
                         } else {
                             echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
                         }
