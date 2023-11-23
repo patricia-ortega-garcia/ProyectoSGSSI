@@ -1,9 +1,5 @@
 <?php
 session_start();
-header("X-Frame-Options: SAMEORIGIN");
-header("X-Content-Type-Options: nosniff");
-header_remove("X-Powered-By");
-
 // Incluir archivo de configuración y verificar la sesión del usuario (debes implementar la lógica de autenticación)
 include("config.php");
 include("funciones.php");
