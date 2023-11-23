@@ -11,7 +11,7 @@ header("X-Content-Type-Options: nosniff");
         exit();
     }*/
 
-    if ($_SESSION['incorrectosSeguidos'] == 5) {
+    if ($_SESSION['incorrectosSeguidos'] == 3) {
         $_SESSION['incorrectosSeguidos'] = 0;
     	echo "<h1> ¡Ups! </h1>";
         echo "<p class = mensaje> Has fallado 5 veces seguidas, para asegurarte de que no eres un bot pulsa en el botón de abajo para volver </p>";
