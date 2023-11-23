@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("config.php"); // Incluye el archivo de configuración
+include("config.php");
 include("funciones.php");
 include("comprobar_contraseña.php");
 
@@ -66,9 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["usuario"] = $usuario;
         $_SESSION["dni"] = $dni;
-        echo "<h1> ¡Felicidades! </h1>";
+        //echo "<h1> ¡Felicidades! </h1>";
         error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> Se ha registrado el usuario correctamente ".$_POST['usuario']." \n", 3, "logs.log");
-        //header("Location: principal.php");
+        header("Location: principal.php");
         exit();
     } else {
         echo "Error al registrar el usuario: " . mysqli_error($conn);
