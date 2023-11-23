@@ -4,8 +4,8 @@ session_start();
 
 // Conexión a la base de datos
 $hostname = "db";
-$username = "administradoresroot";
-$password = "ProyectoSGSSI#2023";
+$username = "admin";
+$password = "test";
 $db = "database";
 
 $conn = mysqli_connect($hostname, $username, $password, $db);
