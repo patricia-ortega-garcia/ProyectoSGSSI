@@ -1156,13 +1156,6 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(50) NOT NULL,
   `contraseña` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `telefono`, `fecha_nacimiento`, `email`, `usuario`, `contraseña`) VALUES ('Ana', 'García', '99999999R', 600000000, '2023-10-14', 'ejemplo@gmail.com', 'Anita', 'contraseña1234');
-
 -- --------------------------------------------------------
 
 --
