@@ -1,12 +1,12 @@
 <?php
 session_start();
+include("config.php"); // Incluye el archivo de configuración
 
 // Verificar la sesión del usuario (debes implementar esta lógica)
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +27,6 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 // Establece la conexión a la base de datos aquí
-include("config.php"); // Incluye el archivo de configuración
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
