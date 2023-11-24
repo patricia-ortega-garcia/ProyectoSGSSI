@@ -8,9 +8,6 @@ web:
      - db
    volumes:
      - ./app:/var/www/html/
-     - apache2.conf:/etc/apache2/
-
-
 
 db:
   image: mariadb:10.8.2

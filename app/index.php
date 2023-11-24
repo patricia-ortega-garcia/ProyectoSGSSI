@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+//si no se ha creado un token para evitar csfr, se crea:
+if (!isset($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+var_dump($_SESSION['token'])
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,6 +33,7 @@ session_start();
             ?>
             <pre>   </pre>
             <form id="inicio-sesion-form" action="gestionar_login.php" method="POST">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>
 
@@ -51,7 +58,7 @@ session_start();
             <!-- <button onclick="window.location.href='registro.html'">Registrarse</button> -->
         </section>
     </main>
-    <!-- <script src="script.js"></script> -->
+    <<script type="text/javascript" src="./script.js"></script> 
 </body>
 </html>
 

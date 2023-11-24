@@ -14,45 +14,59 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera los datos del formulario
-    $nombre = $_POST["nombre"];
-    $creador = $_POST["creador"];
-    $productora = $_POST["productora"];
-    $genero = $_POST["genero"];
-    $sistema_operativo = $_POST["sistema_operativo"];
-    $fecha_lanzamiento = $_POST["fecha_lanzamiento"];
-
-
-if (!$conn) {
-    die("La conexión a la base de datos falló: " . mysqli_connect_error());
+if (isset($_POST['token'])){
+    if($_POST['token'] === $_SESSION['token']){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Recupera los datos del formulario
+            $nombre = $_POST["nombre"];
+            $creador = $_POST["creador"];
+            $productora = $_POST["productora"];
+            $genero = $_POST["genero"];
+            $sistema_operativo = $_POST["sistema_operativo"];
+            $fecha_lanzamiento = $_POST["fecha_lanzamiento"];
+        
+        
+        if (!$conn) {
+            die("La conexión a la base de datos falló: " . mysqli_connect_error());
+        }
+        
+        
+        // Parámetros para la paginación
+        $porPagina = 10; // Número de elementos por página
+        $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+        $inicio = ($pagina - 1) * $porPagina;
+        
+        // Consulta SQL con LIMIT para paginación
+        $sql = "SELECT * FROM mytable WHERE Name LIKE '%$nombre%' AND Developer LIKE '%$creador%' AND Producer LIKE '%$productora%' AND Genre LIKE '%$genero%' AND Operating_System LIKE '%$sistema_operativo%' AND Date_Released LIKE '%$fecha_lanzamiento%'";
+        //Preparar la consulta 
+        $stmt = mysqli_prepare($conn, $sql);
+        // Verificar que la función 'mysqli_prepare' haya tenido éxito
+        if (!$stmt) {
+            die("Error al preparar la consulta SQL: " . $conn->error);
+        }
+        
+        // Asocia los parámetros con los valores
+        mysqli_stmt_bind_param($stmt, "ssssss", $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
+        
+        // Ejecuta la consulta SQL
+        mysqli_stmt_execute($stmt);
+        
+        // Obtiene el resultado
+        $result = mysqli_stmt_get_result($stmt);
+        
+        }
+    }else{
+        $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
+        exit();
+    }
+}else{
+    $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
+        exit();
 }
 
 
-// Parámetros para la paginación
-$porPagina = 10; // Número de elementos por página
-$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-$inicio = ($pagina - 1) * $porPagina;
-
-// Consulta SQL con LIMIT para paginación
-$sql = "SELECT * FROM mytable WHERE Name LIKE '%$nombre%' AND Developer LIKE '%$creador%' AND Producer LIKE '%$productora%' AND Genre LIKE '%$genero%' AND Operating_System LIKE '%$sistema_operativo%' AND Date_Released LIKE '%$fecha_lanzamiento%'";
-//Preparar la consulta 
-$stmt = mysqli_prepare($conn, $sql);
-// Verificar que la función 'mysqli_prepare' haya tenido éxito
-if (!$stmt) {
-    die("Error al preparar la consulta SQL: " . $conn->error);
-}
-
-// Asocia los parámetros con los valores
-mysqli_stmt_bind_param($stmt, "ssssss", $nombre, $creador, $productora, $genero, $sistema_operativo, $fecha_lanzamiento);
-
-// Ejecuta la consulta SQL
-mysqli_stmt_execute($stmt);
-
-// Obtiene el resultado
-$result = mysqli_stmt_get_result($stmt);
-
-}
 
 ?>
 <!DOCTYPE html>

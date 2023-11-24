@@ -5,78 +5,86 @@ include("config.php");
 include("funciones.php");
 include("comprobar_contraseña.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera los datos del formulario
-    /*$nombre = $_POST["nombre"];
-    $apellidos = $_POST["apellidos"];
-    $dni = $_POST["dni"];
-    $telefono = $_POST["telefono"];
-    $fechaNacimiento = $_POST["fecha_nacimiento"];
-    $email = $_POST["email"];
-    $usuario = $_POST["username"];
-    $contraseña = $_POST["password"];
-    */
-    $nombre = cifrar($_POST["nombre"]);
-    $apellidos = cifrar($_POST["apellidos"]);
-    $dni = cifrar($_POST["dni"]);
-    $telefono = cifrar($_POST["telefono"]);
-    $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
-    $email = cifrar($_POST["email"]);
-    $usuario = cifrar($_POST["username"]);
-    $contraseña = $_POST["password"];
-    $sal = "";
 
-    /*$cont = 0;
-    while ($cont < 10) {
-  	    $sal = $sal.chr(random_int(65, 90));
-  	$cont++;
-    }*/
+if (isset($_POST['token'])){
+    if($_POST['token'] === $_SESSION['token']){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    //$contraseña_sal = $contraseña.$sal;
-    //$hash_contraseña = hash('sha256',$contraseña_sal); //No me funciona el hash
-    //Validar parametros (Falta hacer)
+            $nombre = cifrar($_POST["nombre"]);
+            $apellidos = cifrar($_POST["apellidos"]);
+            $dni = cifrar($_POST["dni"]);
+            $telefono = cifrar($_POST["telefono"]);
+            $fechaNacimiento = cifrar($_POST["fecha_nacimiento"]);
+            $email = cifrar($_POST["email"]);
+            $usuario = cifrar($_POST["username"]);
+            $contraseña = $_POST["password"];
+            $sal = "";
+        
+            /*$cont = 0;
+            while ($cont < 10) {
+                  $sal = $sal.chr(random_int(65, 90));
+              $cont++;
+            }*/
+            
+            //$contraseña_sal = $contraseña.$sal;
+            //$hash_contraseña = hash('sha256',$contraseña_sal); //No me funciona el hash
+            //Validar parametros (Falta hacer)
+        
+            if (comprobar($contraseña)) {
+                die("La contraseña es muy mala, cambiala");
+            }
+            $contra_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+            
+            // Verifica la conexión
+            if (!$conn) {
+                die("La conexión a la base de datos falló: " . mysqli_connect_error());
+            }
+        
+            // Crea la consulta SQL para insertar el nuevo usuario en la tabla
+            $sql = "INSERT INTO usuarios_cod (nombre, apellidos, dni, telefono, fecha_nacimiento, email, username, sal, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+            // Prepara la consulta SQL
+            $stmt = mysqli_prepare($conn, $sql);
+        
+            //Verificar que la función 'mysqli_prepare' haya tenido éxito
+            if (!$stmt) {
+                die("Error al preparar la consulta SQL: " . mysqli_error($conn));
+            }
+        
+            // Asocia los parámetros con los valores
+            mysqli_stmt_bind_param($stmt, "sssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $sal, $contra_hash); /*$hash_contraseña*/
+        
+            // Ejecuta la consulta SQL
+            if (mysqli_stmt_execute($stmt)) {
+                //echo "Registro exitoso. ¡Bienvenido, $nombre!";
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                $_SESSION["dni"] = $dni;
+                //echo "<h1> ¡Felicidades! </h1>";
+                error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> Se ha registrado el usuario correctamente ".$_POST['usuario']." \n", 3, "logs.log");
+                header("Location: principal.php");
+                exit();
+            } else {
+                echo "Error al registrar el usuario: " . mysqli_error($conn);
+            }
+            mysqli_stmt_close($stmt);
+             mysqli_close($conn);
+        
 
-    if (comprobar($contraseña)) {
-        die("La contraseña es muy mala, cambiala");
-    }
-    $contra_hash = password_hash($contraseña, PASSWORD_DEFAULT);
-    
-    // Verifica la conexión
-    if (!$conn) {
-        die("La conexión a la base de datos falló: " . mysqli_connect_error());
-    }
-
-    // Crea la consulta SQL para insertar el nuevo usuario en la tabla
-    $sql = "INSERT INTO usuarios_cod (nombre, apellidos, dni, telefono, fecha_nacimiento, email, username, sal, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    // Prepara la consulta SQL
-    $stmt = mysqli_prepare($conn, $sql);
-
-    //Verificar que la función 'mysqli_prepare' haya tenido éxito
-    if (!$stmt) {
-        die("Error al preparar la consulta SQL: " . mysqli_error($conn));
-    }
-
-    // Asocia los parámetros con los valores
-    mysqli_stmt_bind_param($stmt, "sssssssss", $nombre, $apellidos, $dni, $telefono, $fechaNacimiento, $email, $usuario, $sal, $contra_hash); /*$hash_contraseña*/
-
-    // Ejecuta la consulta SQL
-    if (mysqli_stmt_execute($stmt)) {
-        //echo "Registro exitoso. ¡Bienvenido, $nombre!";
-        session_start();
-        $_SESSION["usuario"] = $usuario;
-        $_SESSION["dni"] = $dni;
-        //echo "<h1> ¡Felicidades! </h1>";
-        error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> Se ha registrado el usuario correctamente ".$_POST['usuario']." \n", 3, "logs.log");
-        header("Location: principal.php");
+    }else{
+        $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
         exit();
-    } else {
-        echo "Error al registrar el usuario: " . mysqli_error($conn);
     }
+
+} else{
+    $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
+        exit();
+}
 
     // Cierra la conexión y la declaración
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+    
 
 }
 ?>
@@ -88,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="./script.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
     <title>Goodgames</title>
 </head>
 <body>
@@ -100,6 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Formulario de Registro</h2>
             <div id="error-message" style="color: F9B17A;"></div>
             <form id="registro-form" action="gestionar_registro.php" class="" method="POST" onsubmit="return verificarFormato();">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="p. ej: Ana" required><br>
 

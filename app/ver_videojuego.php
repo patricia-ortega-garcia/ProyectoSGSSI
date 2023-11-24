@@ -1,6 +1,7 @@
 <?php
 session_start();
 // Verificar si el usuario está autenticado; si no, redirigirlo a la página de inicio de sesión
+include("config.php"); // Incluye el archivo de configuración
 if (!isset($_SESSION['usuario'])) {
     header("Location: index.php");
     exit();
@@ -24,7 +25,6 @@ if (!isset($_SESSION['usuario'])) {
         <section>
 
 <?php
-include("config.php"); // Incluye el archivo de configuración
 
 if (isset($_GET['id'])) {
     $videojuegoId = $_GET['id'];
@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
     }
 
     //Valores de los parametros
-    mysqli_stmt_bind_param($stmt, "i", $videojuegoId);
+   // mysqli_stmt_bind_param($stmt, "i", $videojuegoId);
 
     //Ejecutar la consulta preparada
     mysqli_stmt_execute($stmt);
