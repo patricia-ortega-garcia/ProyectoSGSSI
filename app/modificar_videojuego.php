@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Ejecutar la consulta preparada
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: ver_videojuego.php?id=" . $videojuego_id);
+            echo "<script> window.location.replace('http://localhost:81/ver_videojuego.php'); </script> ";
             exit();
         } else {
             $error_message = "Error al guardar los cambios: " . mysqli_stmt_error($stmt);
