@@ -14,9 +14,9 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
-if (isset($_POST['token'])){
-    if($_POST['token'] === $_SESSION['token']){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST['token'])){
+        if ($_POST['token'] === $_SESSION['token']) {
             // Recupera los datos del formulario
             $nombre = $_POST["nombre"];
             $creador = $_POST["creador"];

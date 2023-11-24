@@ -22,12 +22,6 @@ if (!isset($_SESSION["usuario"])) {
     </header>
     <main>
 <?php
-if (!isset($_SESSION["usuario"])) {
-    header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
-    exit();
-}
-// Establece la conexión a la base de datos aquí
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -54,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Ejecutar la consulta preparada
         if (mysqli_stmt_execute($stmt)) {
-            echo "<script> window.location.replace('http://localhost:81/ver_videojuego.php'); </script> ";
+            header("Location: ver_videojuego.php?id=" . $videojuego_id);
             exit();
         } else {
             $error_message = "Error al guardar los cambios: " . mysqli_stmt_error($stmt);
@@ -157,6 +151,7 @@ if (isset($_GET['id'])) {
     <main>
  
 <form action="modificar_videojuego.php" method="POST"  onsubmit="return check_videojuego();">
+        <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
         <input type="hidden" name="videojuegoId" value="<?php echo $videojuegoId; ?>">
         <label for="Name">Nombre:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>

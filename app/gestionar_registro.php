@@ -6,10 +6,10 @@ include("funciones.php");
 include("comprobar_contraseña.php");
 
 
-if (isset($_POST['token'])){
-    if($_POST['token'] === $_SESSION['token']){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST['token'])){
+        if ($_POST['token'] === $_SESSION['token']) {
+              
             $nombre = cifrar($_POST["nombre"]);
             $apellidos = cifrar($_POST["apellidos"]);
             $dni = cifrar($_POST["dni"]);
