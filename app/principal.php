@@ -93,7 +93,7 @@ $result = $conn->query($sql);
 
                 <pre>     </pre>
                 <div class="button-container">
-                    <button class="button secondary-button" onclick="window.location.href='buscar_juegos.html'">Buscar videojuegos</button>
+                    <button class="button secondary-button" onclick="window.location.href='buscar_juegos.php'">Buscar videojuegos</button>
                     <pre>     </pre>
                     <button class="button secondary-button" onclick="window.location.href='anadir_videojuego.html'">Añadir videojuego</button>
                 </div>
