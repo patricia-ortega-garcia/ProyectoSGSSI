@@ -1,11 +1,12 @@
 <?php
 session_start();
+include('funciones.php');
 
 //si no se ha creado un token para evitar csfr, se crea:
-if (!isset($_SESSION['token'])) {
+if (!isset($_SESSION['token']) || tokenCaducado($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
+    $_SESSION['token_tiempo'] = time(); 
 }
-var_dump($_SESSION['token'])
 
 ?>
 <!DOCTYPE html>

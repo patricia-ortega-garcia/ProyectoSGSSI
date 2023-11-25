@@ -5,7 +5,6 @@ include("config.php");
 include("funciones.php");
 include("comprobar_contraseña.php");
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_POST['token'])){
         if ($_POST['token'] === $_SESSION['token']) {

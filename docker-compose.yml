@@ -11,6 +11,7 @@ web:
      - ./app:/var/www/html/
      - ./localhost.conf:/etc/apache2/sites-available/localhost.conf
      - ./apache2.conf:/etc/apache2/apache2.conf
+     - RUTA_CLAVE_PRIVADA=/app/private_key.pem
 
 db:
   image: mariadb:10.8.2

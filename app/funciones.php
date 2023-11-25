@@ -20,4 +20,9 @@ function descifrar($dato) {
 
 }
 
+function tokenCaducado($token){
+	$duracion = 1800;
+	return (isset($_SESSION['token_tiempo']) && (time() - $_SESSION['token_tiempo']) > $duracion);
+}
+
 ?>
