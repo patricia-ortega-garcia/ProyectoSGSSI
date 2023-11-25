@@ -175,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $totalPaginas = ceil($fila["total"] / $porPagina);
 
             // Mostrar enlaces de paginación
+            /*
             echo "<div>";
             for ($i = 1; $i <= $totalPaginas; $i++) {
                  if ($i == $pagina) {
@@ -183,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                      echo "<a href='?pagina=$i'>$i</a> ";
                 }
             }
-            echo "</table>";
+            echo "</table>";*/
            }
            else {
                 echo "No se encontraron registros.";
