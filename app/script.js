@@ -48,6 +48,7 @@ function verificarFormato() {
     var fechaNacimiento = document.getElementById('fecha_nacimiento').value;
     var email = document.getElementById('email').value;
     var hoy = new Date();
+    var contrasenia = document.getElementById('password').value;
     const pattern = new RegExp('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$', 'i');
     //https://es.stackoverflow.com/questions/81041/expresion-regular-para-validar-letras-con-acentos-y-%C3%B1
 
@@ -92,7 +93,6 @@ function verificarFormato() {
         alert('DNI erróneo');
             return false;
     }
-
 
    // window.alert("Formatos validos")
    // return true; // Devuelve true si todas las validaciones son exitosas
@@ -184,3 +184,6 @@ function check_videojuego(){
         return false;
     }
 }
+
+
+

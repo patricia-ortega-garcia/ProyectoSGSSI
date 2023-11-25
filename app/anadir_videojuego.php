@@ -15,7 +15,7 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['token'])){
+    if(isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
         if ($_POST['token'] === $_SESSION['token']) {
             // Recupera los datos del formulario
             $nombre = $_POST["nombre"];

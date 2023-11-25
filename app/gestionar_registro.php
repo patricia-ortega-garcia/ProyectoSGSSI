@@ -5,8 +5,9 @@ include("config.php");
 include("funciones.php");
 include("comprobar_contraseña.php");
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['token'])){
+    if(isset($_POST['token']) && !tokenCaducado($_SESSION['token'])){
         if ($_POST['token'] === $_SESSION['token']) {
               
             $nombre = cifrar($_POST["nombre"]);
@@ -29,8 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             //$hash_contraseña = hash('sha256',$contraseña_sal); //No me funciona el hash
             //Validar parametros (Falta hacer)
         
-            if (comprobar($contraseña)) {
-                die("La contraseña es muy mala, cambiala");
+           if (comprobar($contraseña)) {
+                $_SESSION['contrasenia']='Contraseña débil, Inténtalo de nuevo';
+                header('Location: gestionar_registro.php');
+                exit();
             }
             $contra_hash = password_hash($contraseña, PASSWORD_DEFAULT);
             
@@ -104,6 +107,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     </header>
     <main>
         <section>
+           <?php if (isset($_SESSION['contrasenia'])) {
+            echo $_SESSION['contrasenia'];
+            unset($_SESSION['contrasenia']); // Borra el mensaje para que no se muestre de nuevo
+            }
+            ?>
             <h2>Formulario de Registro</h2>
             <div id="error-message" style="color: F9B17A;"></div>
             <form id="registro-form" action="gestionar_registro.php" class="" method="POST" onsubmit="return verificarFormato();">
