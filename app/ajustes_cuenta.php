@@ -204,10 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="<?php echo descifrar($em); ?>"><br>
-
-                <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username"><br>
-
+                
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password"><br>
 
