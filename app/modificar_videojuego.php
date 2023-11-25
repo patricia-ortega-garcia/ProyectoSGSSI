@@ -7,21 +7,6 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
     exit();
 }
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Goodgames</title>
-</head>
-<body>
-    <header>
-        <h1>Goodgames</h1>
-    </header>
-    <main>
-<?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
