@@ -1,4 +1,5 @@
 <?php
+session_start();
 function cifrar($dato) {
 	$puntero = fopen("clave_simetrica.txt", "r");
 	$clave = fgets($puntero, 50);
@@ -22,7 +23,7 @@ function descifrar($dato) {
 
 function tokenCaducado($token){
 	$duracion = 1800;
-	return (isset($_SESSION['token_tiempo']) && (time() - $_SESSION['token_tiempo']) > $duracion);
+	return (isset($_SESSION['token']) && (time() - $_SESSION['token_tiempo']) > $duracion);
 }
 
 ?>

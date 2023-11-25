@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("funciones.php");
 
 /*// Verificar la sesión del usuario (debes implementar esta lógica)
 if (!isset($_SESSION["usuario"])) {

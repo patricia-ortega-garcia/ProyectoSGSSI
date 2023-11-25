@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("config.php"); // Incluye el archivo de configuración
+include("funciones.php");
 
 // Verificar la sesión del usuario (debes implementar esta lógica)
 if (!isset($_SESSION["usuario"])) {
@@ -9,44 +10,54 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
+        if($_POST['token'] === $_SESSION['token']){
 
-    $videojuego_id = $_POST["videojuegoId"];
-    $name = $_POST["Name"];
-    $dev = $_POST["Developer"];
-    $prod = $_POST["Producer"];
-    $gen = $_POST["Genre"];
-    $op_sys = $_POST["Operating_System"];
-    $date= $_POST["Date_Released"];
-    // Puedes recibir y validar otros campos aquí
-    if (!$conn) {
-        die("La conexión a la base de datos falló: " . mysqli_connect_error());
+            $videojuego_id = $_POST["videojuegoId"];
+            $name = $_POST["Name"];
+            $dev = $_POST["Developer"];
+            $prod = $_POST["Producer"];
+            $gen = $_POST["Genre"];
+            $op_sys = $_POST["Operating_System"];
+            $date= $_POST["Date_Released"];
+            // Puedes recibir y validar otros campos aquí
+            if (!$conn) {
+                die("La conexión a la base de datos falló: " . mysqli_connect_error());
+            }
+            // Consulta SQL para actualizar los datos del producto
+            $sql = "UPDATE mytable SET Name=?, Developer=?, Producer=?, Genre=?, Operating_System=?, Date_Released=? WHERE id=?";
+            //Preparamos la consulta
+            $stmt = mysqli_prepare($conn, $sql);
+
+            // Verificar que la preparación fue exitosa
+            if ($stmt) {
+                // Asociar los parámetros con los valores
+                mysqli_stmt_bind_param($stmt, "sssssi", $name, $dev, $prod, $gen, $op_sys, $date, $videojuego_id);
+
+                // Ejecutar la consulta preparada
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "<script> window.location.replace('http://localhost:81/ver_videojuego.php'); </script> ";
+                    exit();
+                } else {
+                    $error_message = "Error al guardar los cambios: " . mysqli_stmt_error($stmt);
+                }
+
+            } else {
+                $error_message = "Error al preparar la consulta";
+            }
+            // Cerrar la consulta preparada
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+        }else{ 
+            $_SESSION['mensaje'] = "Error: Token no válido";
+            header("Location: index.php");
+            exit();}
+    }else{
+        $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
+        exit();
     }
-    // Consulta SQL para actualizar los datos del producto
-    $sql = "UPDATE mytable SET Name=?, Developer=?, Producer=?, Genre=?, Operating_System=?, Date_Released=? WHERE id=?";
-    //Preparamos la consulta
-    $stmt = mysqli_prepare($conn, $sql);
-
-    // Verificar que la preparación fue exitosa
-    if ($stmt) {
-        // Asociar los parámetros con los valores
-        mysqli_stmt_bind_param($stmt, "sssssi", $name, $dev, $prod, $gen, $op_sys, $date, $videojuego_id);
-
-        // Ejecutar la consulta preparada
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<script> window.location.replace('http://localhost:81/ver_videojuego.php'); </script> ";
-            exit();
-        } else {
-            $error_message = "Error al guardar los cambios: " . mysqli_stmt_error($stmt);
-        }
-
-    } else {
-        $error_message = "Error al preparar la consulta";
-    }
-    // Cerrar la consulta preparada
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-
-    }
+}
 if (isset($_GET['id'])) {
     $videojuegoId = $_GET['id'];
 }

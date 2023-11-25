@@ -50,100 +50,115 @@ if ($resultado) {
 mysqli_stmt_close($stmt);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera los datos del formulario
-    $nombre = cifrar($_POST["nombre"]);
-    $apellidos = cifrar($_POST["apellidos"]);
-    $telefono = cifrar($_POST["telefono"]);
-    $fecha_nacimiento = cifrar($_POST["fecha_nacimiento"]);
-    $email = cifrar($_POST["email"]);
-    /*$usuario = $_POST["username"];*/ //Hay que poner el DNI
-    $password = $_POST["password"];
-    if (comprobar($password)) {
-        die("La contraseña es muy mala, cambiala");
+    if(isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
+        if ($_POST['token'] === $_SESSION['token']) {
+            // Recupera los datos del formulario
+            $nombre = cifrar($_POST["nombre"]);
+            $apellidos = cifrar($_POST["apellidos"]);
+            $telefono = cifrar($_POST["telefono"]);
+            $fecha_nacimiento = cifrar($_POST["fecha_nacimiento"]);
+            $email = cifrar($_POST["email"]);
+            /*$usuario = $_POST["username"];*/ //Hay que poner el DNI
+            $password = $_POST["password"];
+            if (comprobar($password)) {
+                die("La contraseña es muy mala, cambiala");
+            }
+
+            $actual=$_SESSION["usuario"];
+
+            $nombresql="UPDATE usuarios_cod SET nombre=? WHERE username=? ";
+            $nombrestmt=mysqli_prepare($conn, $nombresql);
+
+            $apellidossql="UPDATE usuarios_cod SET apellidos=? WHERE username=? ";
+            $apellidosstmt=mysqli_prepare($conn, $apellidossql);
+
+            $telefonosql="UPDATE usuarios_cod SET telefono=? WHERE username=? ";
+            $telefonostmt=mysqli_prepare($conn, $telefonosql);
+
+            $fechasql="UPDATE usuarios_cod SET fecha_nacimiento=? WHERE username=? ";
+            $fechastmt=mysqli_prepare($conn, $fechasql);
+
+            $emailsql="UPDATE usuarios_cod SET email=? WHERE username=? ";
+            $emailstmt=mysqli_prepare($conn, $emailsql);
+
+            //$usuariosql="UPDATE usuarios_cod SET dni='$dni' WHERE dni='$actual' ";
+            $contrasenasql="UPDATE usuarios_cod SET contraseña=? WHERE username=? ";
+            $contrasenastmt=mysqli_prepare($conn, $contrasenasql);
+
+            
+            
+            if(!empty($nombre)){
+                mysqli_stmt_bind_param($nombrestmt, "ss", $nombre, $actual);
+                //$ejecutar2=mysqli_query($conn,$nombresql);
+                if(mysqli_stmt_execute($nombrestmt)){
+                }
+            }
+            
+            if(!empty($apellidos)){
+                mysqli_stmt_bind_param($apellidosstmt, "ss", $apellidos, $actual);
+                //$ejecutar7=mysqli_query($conn,$apellidossql);
+                if(mysqli_stmt_execute($apellidosstmt)){
+                }
+            }
+
+            if(!empty($telefono)){
+                mysqli_stmt_bind_param($telefonostmt, "ss", $telefono, $actual);
+                //$ejecutar3=mysqli_query($conn,$telefonosql);
+                if(mysqli_stmt_execute($telefonostmt)){
+                }
+            }
+
+            if(!empty($fecha_nacimiento)){
+                mysqli_stmt_bind_param($fechastmt, "ss", $fecha_nacimiento, $actual);
+                //$ejecutar4=mysqli_query($conn,$fechasql);
+                if(mysqli_stmt_execute($fechastmt)){
+                }
+            }
+
+            if(!empty($email)){
+                mysqli_stmt_bind_param($emailstmt, "ss", $email, $actual);
+                //$ejecutar5=mysqli_query($conn,$emailsql);
+                if(mysqli_stmt_execute($emailstmt)){
+                }
+            }
+
+            if(!empty($password)){
+                mysqli_stmt_bind_param($contrasenastmt, "ss", $password, $actual);
+                //$ejecutar6=mysqli_query($conn,$contrasenasql);
+                if(mysqli_stmt_execute($contrasenastmt)){
+                }
+             }
+             if(!empty($nombre)){
+                mysqli_stmt_close($nombrestmt);
+            }
+            if(!empty($apellidos)){
+                mysqli_stmt_close($apellidosstmt);
+            }
+            if(!empty($telefono)){
+                mysqli_stmt_close($telefonostmt);
+            }
+            if(!empty($fecha_nacimiento)){
+                mysqli_stmt_close($fechastmt);
+            }
+            if(!empty($email)){
+                mysqli_stmt_close($emailstmt);
+            }
+            if(!empty($password)){
+                mysqli_stmt_close($contrasenastmt);
+            }
+        
+            mysqli_close($conn);
+        }else{
+            $_SESSION['mensaje'] = "Error: Token no válido";
+            header("Location: index.php");
+            exit();}
+    }else{
+        $_SESSION['mensaje'] = "Error: Token no válido";
+        header("Location: index.php");
+        exit();
     }
 
-    $actual=$_SESSION["usuario"];
-
-    $nombresql="UPDATE usuarios_cod SET nombre=? WHERE username=? ";
-    $nombrestmt=mysqli_prepare($conn, $nombresql);
-
-    $apellidossql="UPDATE usuarios_cod SET apellidos=? WHERE username=? ";
-    $apellidosstmt=mysqli_prepare($conn, $apellidossql);
-
-    $telefonosql="UPDATE usuarios_cod SET telefono=? WHERE username=? ";
-    $telefonostmt=mysqli_prepare($conn, $telefonosql);
-
-    $fechasql="UPDATE usuarios_cod SET fecha_nacimiento=? WHERE username=? ";
-    $fechastmt=mysqli_prepare($conn, $fechasql);
-
-    $emailsql="UPDATE usuarios_cod SET email=? WHERE username=? ";
-    $emailstmt=mysqli_prepare($conn, $emailsql);
-
-    //$usuariosql="UPDATE usuarios_cod SET dni='$dni' WHERE dni='$actual' ";
-    $contrasenasql="UPDATE usuarios_cod SET contraseña=? WHERE username=? ";
-    $contrasenastmt=mysqli_prepare($conn, $contrasenasql);
-
-    
-    
-    if(!empty($nombre)){
-        mysqli_stmt_bind_param($nombrestmt, "ss", $nombre, $actual);
-        //$ejecutar2=mysqli_query($conn,$nombresql);
-        if(mysqli_stmt_execute($nombrestmt)){
-          ?> 
-          <!--<h3 class="bien">¡Nombre modificado correctamente!</h3>-->
-            <?php
-        }
-    }
-    
-    if(!empty($apellidos)){
-        mysqli_stmt_bind_param($apellidosstmt, "ss", $apellidos, $actual);
-        //$ejecutar7=mysqli_query($conn,$apellidossql);
-        if(mysqli_stmt_execute($apellidosstmt)){
-          ?> 
-          <!--<h3 class="bien">¡Apellido modificado correctamente!</h3>-->
-            <?php
-        }
-    }
-
-    if(!empty($telefono)){
-        mysqli_stmt_bind_param($telefonostmt, "ss", $telefono, $actual);
-        //$ejecutar3=mysqli_query($conn,$telefonosql);
-        if(mysqli_stmt_execute($telefonostmt)){
-            ?> 
-            <!--<h3 class="bien">¡Telefono modificado correctamente!</h3>-->
-            <?php
-        }
-    }
-
-    if(!empty($fecha_nacimiento)){
-        mysqli_stmt_bind_param($fechastmt, "ss", $fecha_nacimiento, $actual);
-        //$ejecutar4=mysqli_query($conn,$fechasql);
-        if(mysqli_stmt_execute($fechastmt)){
-            ?> 
-            <!--<h3 class="bien">¡Fecha modificada correctamente!</h3>-->
-            <?php
-        }
-    }
-
-    if(!empty($email)){
-        mysqli_stmt_bind_param($emailstmt, "ss", $email, $actual);
-        //$ejecutar5=mysqli_query($conn,$emailsql);
-        if(mysqli_stmt_execute($emailstmt)){
-            ?> 
-                <!--<h3 class="bien">¡Email modificado correctamente!</h3> -->
-                    <?php
-        }
-    }
-
-    if(!empty($password)){
-        mysqli_stmt_bind_param($contrasenastmt, "ss", $password, $actual);
-        //$ejecutar6=mysqli_query($conn,$contrasenasql);
-        if(mysqli_stmt_execute($contrasenastmt)){
-            ?> 
-                <!-- <h3 class="bien">¡Contraseña modificada correctamente!</h3> -->
-                    <?php
-        }
-    }
+}
 
     /*
     mysqli_stmt_close($nombrestmt);
@@ -153,29 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_close($emailstmt);
     mysqli_stmt_close($contrasenastmt);
     */
-
-    if(!empty($nombre)){
-        mysqli_stmt_close($nombrestmt);
-    }
-    if(!empty($apellidos)){
-        mysqli_stmt_close($apellidosstmt);
-    }
-    if(!empty($telefono)){
-        mysqli_stmt_close($telefonostmt);
-    }
-    if(!empty($fecha_nacimiento)){
-        mysqli_stmt_close($fechastmt);
-    }
-    if(!empty($email)){
-        mysqli_stmt_close($emailstmt);
-    }
-    if(!empty($password)){
-        mysqli_stmt_close($contrasenastmt);
-    }
-
-    mysqli_close($conn);
     
-}
 ?>
 
 <!DOCTYPE html>
