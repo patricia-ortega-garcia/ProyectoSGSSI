@@ -7,21 +7,6 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
     exit();
 }
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Goodgames</title>
-</head>
-<body>
-    <header>
-        <h1>Goodgames</h1>
-    </header>
-    <main>
-<?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -44,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar que la preparación fue exitosa
     if ($stmt) {
         // Asociar los parámetros con los valores
-        mysqli_stmt_bind_param($stmt, "ssssssi", $name, $dev, $prod, $gen, $op_sys, $date, $videojuego_id);
+        mysqli_stmt_bind_param($stmt, "sssssi", $name, $dev, $prod, $gen, $op_sys, $date, $videojuego_id);
 
         // Ejecutar la consulta preparada
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: ver_videojuego.php?id=" . $videojuego_id);
+            echo "<script> window.location.replace('http://localhost:81/ver_videojuego.php'); </script> ";
             exit();
         } else {
             $error_message = "Error al guardar los cambios: " . mysqli_stmt_error($stmt);
