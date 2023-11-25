@@ -4,10 +4,13 @@ web:
      - ALLOW_OVERRIDE=true
    ports:
      - "81:80"
+     - "443:443"
    links:
      - db
    volumes:
      - ./app:/var/www/html/
+     - ./localhost.conf:/etc/apache2/sites-available/localhost.conf
+     - ./apache2.conf:/etc/apache2/apache2.conf
 
 db:
   image: mariadb:10.8.2
