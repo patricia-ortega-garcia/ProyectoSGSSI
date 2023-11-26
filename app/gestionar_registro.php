@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2>Formulario de Registro</h2>
             <div id="error-message" style="color: F9B17A;"></div>
             <form id="registro-form" action="gestionar_registro.php" class="" method="POST" onsubmit="return verificarFormato();">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
+                <input type ="hidden" name="anticsrf" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="p. ej: Ana" required><br>
 

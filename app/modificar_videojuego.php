@@ -148,7 +148,7 @@ if (isset($_GET['id'])) {
     <main>
  
 <form action="modificar_videojuego.php" method="POST"  onsubmit="return check_videojuego();">
-        <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
+        <input type ="hidden" name="anticsrf" value="<?php echo $_SESSION['anticsrf']; ?>">
         <input type="hidden" name="videojuegoId" value="<?php echo $videojuegoId; ?>">
         <label for="Name">Nombre:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>

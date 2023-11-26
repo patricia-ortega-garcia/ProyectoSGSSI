@@ -191,7 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3>Información a cambiar: </h3>
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
+                <input type ="hidden" name="anticsrf" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="<?php echo descifrar($nm); ?>"><br>
 

@@ -35,7 +35,7 @@ if (!isset($_SESSION['anticsrf']) || tokenCaducado($_SESSION['anticsrf'])) {
             ?>
             <pre>   </pre>
             <form id="inicio-sesion-form" action="gestionar_login.php" method="POST">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
+                <input type ="hidden" name="anticsrf" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>
 
