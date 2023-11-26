@@ -24,7 +24,7 @@ function descifrar($dato) {
 
 function tokenCaducado($token){
 	$duracion = 600;
-	return (isset($_SESSION['token']) && (time() - $_SESSION['token_tiempo']) > $duracion);
+	return (isset($_SESSION['anticsrf']) && (time() - $_SESSION['token_tiempo']) > $duracion);
 }
 
 

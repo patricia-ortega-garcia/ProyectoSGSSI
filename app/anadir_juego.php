@@ -25,7 +25,7 @@ if (!isset($_SESSION["usuario"])) {
             <h2>Formulario de Videojuego</h2>
             
             <form id="videojuego-form" action="anadir_videojuego.php" method="POST">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br>
 

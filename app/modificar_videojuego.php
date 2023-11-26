@@ -10,8 +10,8 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
-        if(hash_equals($_POST['token'],$_SESSION['token'])){
+    if (isset($_POST['anticsrf'])&& !tokenCaducado($_SESSION['anticsrf'])){
+        if(hash_equals($_POST['anticsrf'],$_SESSION['anticsrf'])){
 
             $videojuego_id = $_POST["videojuegoId"];
             $name = $_POST["Name"];
@@ -148,7 +148,7 @@ if (isset($_GET['id'])) {
     <main>
  
 <form action="modificar_videojuego.php" method="POST"  onsubmit="return check_videojuego();">
-        <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+        <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
         <input type="hidden" name="videojuegoId" value="<?php echo $videojuegoId; ?>">
         <label for="Name">Nombre:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $nm; ?>"><br>

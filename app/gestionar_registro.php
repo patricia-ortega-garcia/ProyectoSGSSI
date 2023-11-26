@@ -7,8 +7,8 @@ include("comprobar_contraseña.php");
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['token']) && !tokenCaducado($_SESSION['token'])){
-        if (hash_equals($_POST['token'],$_SESSION['token'])) {
+    if(isset($_POST['anticsrf']) && !tokenCaducado($_SESSION['anticsrf'])){
+        if (hash_equals($_POST['anticsrf'],$_SESSION['anticsrf'])) {
  
             $nombre = cifrar($_POST["nombre"]);
             $apellidos = cifrar($_POST["apellidos"]);
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2>Formulario de Registro</h2>
             <div id="error-message" style="color: F9B17A;"></div>
             <form id="registro-form" action="gestionar_registro.php" class="" method="POST" onsubmit="return verificarFormato();">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="p. ej: Ana" required><br>
 

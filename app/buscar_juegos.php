@@ -24,7 +24,7 @@ if (!isset($_SESSION["usuario"])) {
         <section>
             <h2>Buscador</h2>
             <form id="catalogo-videojuegos-form" action="buscar_videojuego.php" method="POST">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Nombre" ><br>
 

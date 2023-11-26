@@ -51,8 +51,8 @@ if ($resultado) {
 mysqli_stmt_close($stmt);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
-        if (hash_equals($_POST['token'],$_SESSION['token'])) {
+    if(isset($_POST['anticsrf'])&& !tokenCaducado($_SESSION['anticsrf'])){
+        if (hash_equals($_POST['anticsrf'],$_SESSION['anticsrf'])) {
 
             // Recupera los datos del formulario
             $nombre = cifrar($_POST["nombre"]);
@@ -191,7 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3>Información a cambiar: </h3>
 
             <form id="ajustes-form" action="ajustes_cuenta.php" method="POST" onsubmit="return modificarUsuario();">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="<?php echo descifrar($nm); ?>"><br>
 

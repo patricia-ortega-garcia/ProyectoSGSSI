@@ -12,8 +12,8 @@ include("config.php"); // Incluye el archivo de configuración
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     /*
-    if(isset($_POST['token'])){
-        if ($_POST['token'] === $_SESSION['token']) {
+    if(isset($_POST['anticsrf'])){
+        if ($_POST['anticsrf'] === $_SESSION['anticsrf']) {
             // Recupera los datos del formulario
             $nombre = $_POST["nombre"];
             $creador = $_POST["creador"];
@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $fecha_lanzamiento = $_POST["fecha_lanzamiento"];
     */
 
-    if(isset($_POST['token']) && !tokenCaducado($_SESSION['token'])){
-        if (hash_equals($_POST['token'],$_SESSION['token'])) {        
+    if(isset($_POST['anticsrf']) && !tokenCaducado($_SESSION['anticsrf'])){
+        if (hash_equals($_POST['anticsrf'],$_SESSION['anticsrf'])) {        
 
         // Recupera los datos del formulario
         $nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";

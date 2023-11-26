@@ -3,8 +3,8 @@ session_start();
 include('funciones.php');
 
 //si no se ha creado un token para evitar csfr, se crea:
-if (!isset($_SESSION['token']) || tokenCaducado($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
+if (!isset($_SESSION['anticsrf']) || tokenCaducado($_SESSION['anticsrf'])) {
+    $_SESSION['anticsrf'] = bin2hex(random_bytes(32));
     $_SESSION['token_tiempo'] = time(); 
 }
 
@@ -35,7 +35,7 @@ if (!isset($_SESSION['token']) || tokenCaducado($_SESSION['token'])) {
             ?>
             <pre>   </pre>
             <form id="inicio-sesion-form" action="gestionar_login.php" method="POST">
-                <input type ="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                <input type ="hidden" name="token" value="<?php echo $_SESSION['anticsrf']; ?>">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" placeholder="p. ej: Anita" required><br>
 
