@@ -2,4 +2,6 @@ mysql/
 *mysql*
 mysql*
 logs/
+logs/*
+*.log
 
