@@ -5,6 +5,7 @@ services:
     image: web
     environment:
       - ALLOW_OVERRIDE=true
+      - CLAVE_SECRETA=${CLAVE_SECRETA}
     env_file:
         - .env
     ports:
