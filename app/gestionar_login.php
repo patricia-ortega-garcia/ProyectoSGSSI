@@ -49,7 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 if ($_SESSION['incorrectosSeguidos'] == ''){
                                     $_SESSION['incorrectosSeguidos'] = 1;
                                     escribirLog("login");
-                                    echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
+                                    header("Location: index.php");
+                                    exit();
                                 }
                                 else {
                                     $_SESSION['incorrectosSeguidos'] = $_SESSION['incorrectosSeguidos'] + 1;
@@ -59,9 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     if ($_SESSION['incorrectosSeguidos'] == 3) {
                                         //error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha fallado la contraseña 3 veces seguidas. \n", 3, "logs/logs.log");
                                         escribirLog("antibotting");
-                                        echo "<script> window.location.replace('http://localhost:81/3fallosseguidos.php'); </script> ";
+                                        header("Location: 3fallosseguidos.php");
+                                        exit();
                                     } else {
-                                        echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
+                                        header("Location: index.php");
+                                        exit();
                                     }
                                 }
                             }
