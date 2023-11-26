@@ -7,6 +7,7 @@ if (!isset($_SESSION['anticsrf']) || tokenCaducado($_SESSION['anticsrf'])) {
     $_SESSION['anticsrf'] = bin2hex(random_bytes(32));
     $_SESSION['token_tiempo'] = time(); 
 }
+detectarHerramientaSeguridad();
 
 
 ?>
