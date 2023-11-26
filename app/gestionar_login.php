@@ -6,7 +6,7 @@ include("funciones.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
-        if($_POST['token'] === $_SESSION['token']){
+        if(hash_equals($_POST['token'],$_SESSION['token'])){
                 // Recupera los datos del formulario
                 $usuario = cifrar($_POST["username"]);
                 $dni = cifrar($_POST ["dni"]);

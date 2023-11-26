@@ -2,6 +2,7 @@
 session_start();
 
 include("config.php"); // Incluye el archivo de configuración
+include("funciones.php");
 //desde página principal o desde buscar, seleccionar videojuego de catálogo --> pantalla videojuego con botón eliminar.
 if (!$conn) {
     die("La conexión a la base de datos falló: " . mysqli_connect_error());
@@ -11,6 +12,7 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
     exit();
 }
+
 // Parámetros para la paginación
 $porPagina = 10; // Número de elementos por página
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
@@ -51,6 +53,7 @@ $result = $conn->query($sql);
 
     <main>
         <section>
+            <h2>¡Bienvenido <?php echo descifrar($_SESSION['usuario'])?>!</h2>
             <h2>Catálogo de videojuegos</h2>
             <table>
         <tr>

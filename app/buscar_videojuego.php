@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $fecha_lanzamiento = $_POST["fecha_lanzamiento"];
     */
 
-    if(isset($_POST['token'])){
-        if ($_POST['token'] === $_SESSION['token']&& !tokenCaducado($_SESSION['token'])) {        
+    if(isset($_POST['token']) && !tokenCaducado($_SESSION['token'])){
+        if (hash_equals($_POST['token'],$_SESSION['token'])) {        
 
         // Recupera los datos del formulario
         $nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";

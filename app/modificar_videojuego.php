@@ -11,7 +11,7 @@ if (!isset($_SESSION["usuario"])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
-        if($_POST['token'] === $_SESSION['token']){
+        if(hash_equals($_POST['token'],$_SESSION['token'])){
 
             $videojuego_id = $_POST["videojuegoId"];
             $name = $_POST["Name"];
