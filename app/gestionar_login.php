@@ -48,15 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 // echo "Credenciales incorrectas...";
                                 if ($_SESSION['incorrectosSeguidos'] == ''){
                                     $_SESSION['incorrectosSeguidos'] = 1;
+                                    escribirLog("login");
                                     echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";
                                 }
                                 else {
                                     $_SESSION['incorrectosSeguidos'] = $_SESSION['incorrectosSeguidos'] + 1;
                         
-                                    error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER["REMOTE_ADDR"]." --> El usuario se ha identificado de manera incorrecta. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/3 \n", 3, "logs.log");
-                        
+                                    //error_log("Fecha: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER["REMOTE_ADDR"]." --> El usuario se ha identificado de manera incorrecta. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/3 \n", 3, "logs/logs.log");
+                                    escribirLog("login");
                                     if ($_SESSION['incorrectosSeguidos'] == 3) {
-                                        error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha fallado la contraseña 3 veces seguidas. \n", 3, "logs.log");
+                                        //error_log("La fecha de hoy es: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha fallado la contraseña 3 veces seguidas. \n", 3, "logs/logs.log");
+                                        escribirLog("antibotting");
                                         echo "<script> window.location.replace('http://localhost:81/3fallosseguidos.php'); </script> ";
                                     } else {
                                         echo "<script> window.location.replace('http://localhost:81/index.php'); </script> ";

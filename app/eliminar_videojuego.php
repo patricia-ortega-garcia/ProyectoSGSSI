@@ -1,12 +1,13 @@
 <?php
     session_start();
-
-    session_start();
+    include("config.php");
+    include("funciones.php");
 
     if (!isset($_SESSION["usuario"])) {
         header("Location: index.php"); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
         exit();
     }
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,9 @@
         <section>
         <?php
         // Establece la conexión a la base de datos aquí
-        include("config.php"); // Incluye el archivo de configuración
+        if (isset($_SESSION['ultimo_eliminar_tiempo']) && (time() - $_SESSION['ultimo_eliminar_tiempo'] < 60)) {
+            echo "No puedes eliminar elementos durante 1 minuto.";
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
             $videojuego_id = $_GET["id"];
@@ -38,10 +41,12 @@
             $sql = "DELETE FROM mytable WHERE id = $videojuego_id"; // Reemplaza 'videojuegos' por el nombre de tu tabla
             if ($conn->query($sql) === TRUE) {
                 echo "Videojuego eliminado con éxito.";
+                escribirLog("eliminar");
             } else {
                 echo "Error al eliminar el videojuego: " . $conn->error;
             }
-        }
+
+    }
 
         // Cierra la conexión a la base de datos aquí
         mysqli_close($conn);

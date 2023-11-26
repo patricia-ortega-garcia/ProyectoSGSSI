@@ -27,5 +27,17 @@ function tokenCaducado($token){
 	return (isset($_SESSION['anticsrf']) && (time() - $_SESSION['token_tiempo']) > $duracion);
 }
 
+function escribirLog($razon){
+
+	if ($razon == "login"){
+	error_log("Fecha: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER["REMOTE_ADDR"]." --> El usuario se ha identificado de manera incorrecta. Intentos gastados: ".$_SESSION["incorrectosSeguidos"]."/3 \n", 3, "logs/logs.log");
+	} else if ($razon == "antibotting"){
+		error_log("Fecha: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha fallado la contraseña 3 veces seguidas. \n", 3, "logs/logs.log");
+	} else if ($razon == "eliminar"){
+		error_log("Fecha: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha eliminado un elemento \n", 3, "logs/logs.log");
+	}else if ($razon == "eliminar5"){
+		error_log("Fecha: ".date("d-m-20y, H:i:s")." | La IP del usuario es: ".$_SERVER['REMOTE_ADDR']." --> El usuario ha eliminado 5 elementos\n", 3, "logs/logs.log");
+	}
+}
 
 ?>
