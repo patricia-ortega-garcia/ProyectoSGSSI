@@ -2,9 +2,6 @@ cd app
 echo "Vamos a cambiar los permisos de los logs"
 sudo chmod 644 logs.log
 sudo chown www-data logs.log
-echo "Vamos a cambiar los permisos de la clave simétrica"
-sudo chown www-data clave_simetrica.txt
-sudo chmod 400 clave_simetrica.txt 
 echo "Vamos a cambiar los permisos del fichero de contraseñas malas"
 sudo chown www-data 10000-peores-contraseñas.txt
 sudo chmod 400 10000-peores-contraseñas.txt

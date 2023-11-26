@@ -16,6 +16,8 @@ services:
       - ./app:/var/www/html/
       - ./localhost.conf:/etc/apache2/sites-available/localhost.conf
       - ./apache2.conf:/etc/apache2/apache2.conf
+      - ./openssl.cnf:/etc/ssl/openssl.cnf
+
 
   db:
     image: mariadb:10.8.2

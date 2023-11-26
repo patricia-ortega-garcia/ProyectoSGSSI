@@ -1,0 +1,14 @@
+[req]
+distinguished_name = req_distinguished_name
+x509_extensions = v3_ca
+prompt = no
+
+[req_distinguished_name]
+C = ES
+ST = EUSKALHERRIA
+L = BILBAO
+O = EHU
+CN = localhost
+
+[v3_ca]
+basicConstraints = CA:FALSE
