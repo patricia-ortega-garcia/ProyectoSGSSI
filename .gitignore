@@ -4,4 +4,4 @@ mysql*
 logs/
 logs/*
 *.log
-
+*.env
