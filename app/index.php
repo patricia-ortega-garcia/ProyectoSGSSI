@@ -1,15 +1,12 @@
 <?php
 session_start();
 include('funciones.php');
-
+include('config.php');
 //si no se ha creado un token para evitar csfr, se crea:
 if (!isset($_SESSION['anticsrf']) || tokenCaducado($_SESSION['anticsrf'])) {
     $_SESSION['anticsrf'] = bin2hex(random_bytes(32));
     $_SESSION['token_tiempo'] = time(); 
 }
-detectarHerramientaSeguridad();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
