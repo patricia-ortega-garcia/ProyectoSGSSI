@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Goodgames</title>
+</head>
+<body>
+    <header>
+        <h1>Goodgames</h1>
+    </header>
+    <main>
+        <section>
 <?php 
 
   session_start(); 
@@ -19,6 +33,8 @@
 	<br>			
 	<a href="index.php"><input class="button-container" type="button secondary-button" value="Volver a inicio de sesión"> </a>
 
-
-
+    </section>
+    </main>
+</body>
+</html>
 	

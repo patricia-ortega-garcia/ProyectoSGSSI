@@ -15,6 +15,7 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
+
 // Recuperar información del usuario desde la base de datos (debes implementar esta lógica)
 $usuario = $_SESSION["usuario"];
 $dni = $_SESSION["dni"];
@@ -52,6 +53,7 @@ mysqli_stmt_close($stmt);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['token'])&& !tokenCaducado($_SESSION['token'])){
         if ($_POST['token'] === $_SESSION['token']) {
+
             // Recupera los datos del formulario
             $nombre = cifrar($_POST["nombre"]);
             $apellidos = cifrar($_POST["apellidos"]);

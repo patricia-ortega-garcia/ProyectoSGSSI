@@ -8,6 +8,7 @@ if (!isset($_SESSION['token']) || tokenCaducado($_SESSION['token'])) {
     $_SESSION['token_tiempo'] = time(); 
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

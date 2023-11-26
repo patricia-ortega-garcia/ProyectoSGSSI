@@ -1,38 +1,43 @@
-web:
-   image: web
-   environment:
-     - ALLOW_OVERRIDE=true
-   ports:
-     - "81:80"
-     - "443:443"
-   links:
-     - db
-   volumes:
-     - ./app:/var/www/html/
-     - ./localhost.conf:/etc/apache2/sites-available/localhost.conf
-     - ./apache2.conf:/etc/apache2/apache2.conf
+version: '3.1'
 
-db:
-  image: mariadb:10.8.2
-  restart: always
-  volumes:
-    - ./mysql:/var/lib/mysql
-    - ./database.sql:/docker-entrypoint-initdb.d/database.sql
-  environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_USER: administradoresroot
-    MYSQL_PASSWORD: ProyectoSGSSI#2023
-    MYSQL_DATABASE: database
-  ports:
-    - "8889:3306"
+services:
+  web:
+    image: web
+    environment:
+      - ALLOW_OVERRIDE=true
+    env_file:
+        - .env
+    ports:
+      - "81:80"
+      - "443:443"
+    links:
+      - db
+    volumes:
+      - ./app:/var/www/html/
+      - ./localhost.conf:/etc/apache2/sites-available/localhost.conf
+      - ./apache2.conf:/etc/apache2/apache2.conf
 
-phpmyadmin:
-  image: phpmyadmin/phpmyadmin:5.2.1
-  links:
-    - db
-  ports:
-    - 8890:80
-  environment:
-    MYSQL_USER: administradoresroot
-    MYSQL_PASSWORD: ProyectoSGSSI#2023
-    MYSQL_DATABASE: database
+  db:
+    image: mariadb:10.8.2
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: administradoresroot
+      MYSQL_PASSWORD: ProyectoSGSSI#2023
+      MYSQL_DATABASE: database
+    ports:
+      - "8889:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    links:
+      - db
+    ports:
+      - 8890:80
+    environment:
+      MYSQL_USER: administradoresroot
+      MYSQL_PASSWORD: ProyectoSGSSI#2023
+      MYSQL_DATABASE: database

@@ -130,3 +130,12 @@ Fecha: 20-11-2023, 11:14:07 | IP: 172.17.0.1 --> Se ha creado el user con identi
 La fecha de hoy es: 24-11-2023, 12:44:24 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
 La fecha de hoy es: 25-11-2023, 15:20:54 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
 La fecha de hoy es: 25-11-2023, 15:22:01 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
+La fecha de hoy es: 26-11-2023, 11:25:21 | La IP del usuario es: 172.17.0.1 --> El usuario se ha identificado de manera incorrecta. Intentos gastados: 2/3 
+La fecha de hoy es: 26-11-2023, 11:25:33 | La IP del usuario es: 172.17.0.1 --> El usuario se ha identificado de manera incorrecta. Intentos gastados: 3/3 
+La fecha de hoy es: 26-11-2023, 11:25:33 | La IP del usuario es: 172.17.0.1 --> El usuario ha fallado la contraseña 3 veces seguidas. 
+La fecha de hoy es: 26-11-2023, 11:33:31 | La IP del usuario es: 172.17.0.1 --> El usuario se ha identificado de manera incorrecta. Intentos gastados: 2/3 
+La fecha de hoy es: 26-11-2023, 11:33:38 | La IP del usuario es: 172.17.0.1 --> El usuario se ha identificado de manera incorrecta. Intentos gastados: 3/3 
+La fecha de hoy es: 26-11-2023, 11:33:38 | La IP del usuario es: 172.17.0.1 --> El usuario ha fallado la contraseña 3 veces seguidas. 
+La fecha de hoy es: 26-11-2023, 12:40:09 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
+La fecha de hoy es: 26-11-2023, 12:42:53 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
+La fecha de hoy es: 26-11-2023, 12:49:33 | La IP del usuario es: 172.17.0.1 --> Se ha registrado el usuario correctamente  
